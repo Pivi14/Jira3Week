@@ -3,23 +3,19 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ProfilPage {
-    WebDriver driver;
-    WebDriverWait wait;
+public class ProfilPage extends WebPage{
     @FindBy(id="up-d-username")
     WebElement userName;
 
     public ProfilPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, 10);
+        super(driver);
     }
 
     public void goProfilPage(){
         driver.get("https://jira.codecool.codecanvas.hu/secure/ViewProfile.jspa");
+        wait.until(ExpectedConditions.visibilityOf(userName));
     }
 
     public String getUserName(){
