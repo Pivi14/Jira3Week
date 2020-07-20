@@ -1,25 +1,28 @@
 package test;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.chrome.ChromeDriver;
 import page.MainPage;
+import page.ProfilPage;
 
-public class LogTest {
-    private static final String driverPath = System.getenv("WEB_DRIVER");
-    private static ChromeDriver driver;
+public class LogTest implements DriverSetup{
+    MainPage mainPage;
+    ProfilPage profilPage;
 
     @BeforeAll
-    static void setUp() {
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(System.getenv("MAIN_PAGE"));
+    void pageSetup(){
+        if(mainPage == null){
+            mainPage = new MainPage(driver);
+        }
+        if (profilPage == null){
+            profilPage = new ProfilPage(driver);
+        }
     }
 
     @Test
-    public void loginHappyWay(){
-        MainPage mainPage = new MainPage(driver);
+    void loginHappyWay(){
         mainPage.login(System.getenv("USER"), System.getenv("PASSWORD"));
+
     }
 }
