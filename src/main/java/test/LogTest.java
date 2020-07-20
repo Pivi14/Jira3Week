@@ -1,17 +1,16 @@
 package test;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import page.MainPage;
 
 public class LogTest {
-    String driverPath = System.getenv("WEB_DRIVER");
-    WebDriver driver;
+    private static final String driverPath = System.getenv("WEB_DRIVER");
+    private static ChromeDriver driver;
 
-    @BeforeClass
-    public void setUp() {
+    @BeforeAll
+    static void setUp() {
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -21,6 +20,6 @@ public class LogTest {
     @Test
     public void loginHappyWay(){
         MainPage mainPage = new MainPage(driver);
-        mainPage.login(System.getenv("USER_NAME"), System.getenv("PASSWORD"));
+        mainPage.login(System.getenv("USER"), System.getenv("PASSWORD"));
     }
 }
