@@ -53,5 +53,11 @@ public class LogTest implements DriverSetup{
         Assertions.assertTrue(mainPage.errorMessageAppears());
     }
 
-
+    @Test
+    void logout(){
+        mainPage.login(System.getenv("USER"), System.getenv("PASSWORD"));
+        homePage.waitForLoad();
+        homePage.logout();
+        Assertions.assertTrue(mainPage.logoutMessageAppears());
+    }
 }

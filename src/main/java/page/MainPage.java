@@ -14,6 +14,8 @@ public class MainPage extends WebPage{
     WebElement loginButton;
     @FindBy(id="usernameerror")
     WebElement userNameErrorMessage;
+    @FindBy(xpath = "//h1[contains(., 'Logout')]")
+    WebElement logoutMessage;
 
     public MainPage(WebDriver driver){
         super(driver);
@@ -28,10 +30,16 @@ public class MainPage extends WebPage{
 
     public void goToMainPage(){
         driver.get(System.getenv("MAIN_PAGE"));
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
     }
 
     public boolean errorMessageAppears(){
         wait.until(ExpectedConditions.visibilityOf(userNameErrorMessage));
         return userNameErrorMessage != null;
+    }
+
+    public boolean logoutMessageAppears(){
+        wait.until(ExpectedConditions.visibilityOf(logoutMessage));
+        return logoutMessage != null;
     }
 }
