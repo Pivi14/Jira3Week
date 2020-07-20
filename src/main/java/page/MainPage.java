@@ -3,31 +3,43 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage {
-    WebDriver driver;
-    WebDriverWait wait;
+public class MainPage extends WebPage{
     @FindBy(id="login-form-username")
     WebElement userNameField;
     @FindBy(id="login-form-password")
     WebElement passwordField;
     @FindBy(id="login")
     WebElement loginButton;
+    @FindBy(id="usernameerror")
+    WebElement userNameErrorMessage;
+    @FindBy(xpath = "//h1[contains(., 'Logout')]")
+    WebElement logoutMessage;
 
     public MainPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, 10);
-
+        super(driver);
     }
 
     public void login(String userName, String password){
-        wait.until(ExpectedConditions.visibilityOf(userNameField));
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
         userNameField.sendKeys(userName);
         passwordField.sendKeys(password);
         loginButton.submit();
+    }
+
+    public void goToMainPage(){
+        driver.get(System.getenv("MAIN_PAGE"));
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
+    }
+
+    public boolean errorMessageAppears(){
+        wait.until(ExpectedConditions.visibilityOf(userNameErrorMessage));
+        return userNameErrorMessage != null;
+    }
+
+    public boolean logoutMessageAppears(){
+        wait.until(ExpectedConditions.visibilityOf(logoutMessage));
+        return logoutMessage != null;
     }
 }
