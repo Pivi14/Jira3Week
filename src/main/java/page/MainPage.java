@@ -12,15 +12,26 @@ public class MainPage extends WebPage{
     WebElement passwordField;
     @FindBy(id="login")
     WebElement loginButton;
+    @FindBy(id="usernameerror")
+    WebElement userNameErrorMessage;
 
     public MainPage(WebDriver driver){
         super(driver);
     }
 
     public void login(String userName, String password){
-        wait.until(ExpectedConditions.visibilityOf(userNameField));
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
         userNameField.sendKeys(userName);
         passwordField.sendKeys(password);
         loginButton.submit();
+    }
+
+    public void goToMainPage(){
+        driver.get(System.getenv("MAIN_PAGE"));
+    }
+
+    public boolean errorMessageAppears(){
+        wait.until(ExpectedConditions.visibilityOf(userNameErrorMessage));
+        return userNameErrorMessage != null;
     }
 }
