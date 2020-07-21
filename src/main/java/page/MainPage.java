@@ -29,8 +29,7 @@ public class MainPage extends WebPage{
     }
 
     public void goToMainPage(){
-        driver.get(System.getenv("MAIN_PAGE"));
-        wait.until(ExpectedConditions.visibilityOf(loginButton));
+        goToPageAndWait(System.getenv("MAIN_PAGE"), loginButton);
     }
 
     public boolean errorMessageAppears(){

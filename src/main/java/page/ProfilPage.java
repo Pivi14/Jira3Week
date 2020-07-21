@@ -3,7 +3,6 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProfilPage extends WebPage{
     @FindBy(id="up-d-username")
@@ -14,8 +13,7 @@ public class ProfilPage extends WebPage{
     }
 
     public void goProfilPage(){
-        driver.get("https://jira.codecool.codecanvas.hu/secure/ViewProfile.jspa");
-        wait.until(ExpectedConditions.visibilityOf(userName));
+        goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/ViewProfile.jspa", userName);
     }
 
     public String getUserName(){

@@ -12,6 +12,8 @@ public class HomePage extends WebPage{
     WebElement profileMenu;
     @FindBy(id="log_out")
     WebElement logoutButton;
+    @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
+    WebElement homeTitle;
 
     public HomePage(WebDriver driver){
         super(driver);
@@ -19,6 +21,10 @@ public class HomePage extends WebPage{
 
     public void waitForLoad(){
         wait.until(ExpectedConditions.visibilityOf(createButton));
+    }
+
+    public void goToPage(){
+        goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa", homeTitle);
     }
 
     public void logout(){

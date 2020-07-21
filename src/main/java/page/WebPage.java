@@ -1,7 +1,9 @@
 package page;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class WebPage {
@@ -14,4 +16,8 @@ public abstract class WebPage {
         wait = new WebDriverWait(driver, 10);
     }
 
+    public void goToPageAndWait(String url, WebElement webElement){
+        driver.get(url);
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
 }
