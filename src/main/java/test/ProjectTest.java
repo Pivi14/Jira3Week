@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import page.HomePage;
 import page.MainPage;
 import page.ProjectPage;
@@ -32,6 +34,14 @@ public class ProjectTest implements DriverSetup{
     void browseMainProject(){
         projectPage.goToPage();
         Assertions.assertTrue(projectPage.mainPageAppears());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/availableProjects.csv", numLinesToSkip = 1)
+    void availableProjects(String url, String title){
+        System.out.println("url: " + url);
+        System.out.println("title: " + title);
+        Assertions.assertTrue(projectPage.checkAvailableProject(url, title));
     }
 
 }

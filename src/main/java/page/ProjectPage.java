@@ -22,4 +22,10 @@ public class ProjectPage extends WebPage{
     public boolean mainPageAppears(){
         return driver.findElement(By.xpath("//a[@href='/browse/MTP']")) != null;
     }
+
+    public boolean checkAvailableProject(String url, String title){
+        driver.get(url);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//dd[@class='project-meta-value'][contains(., " + title + ")]")));
+        return driver.findElement(By.xpath("//dd[@class='project-meta-value'][contains(., " + title + ")]")) != null;
+    }
 }
