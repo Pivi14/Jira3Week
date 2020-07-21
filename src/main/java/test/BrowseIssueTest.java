@@ -7,19 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page.HomePage;
+import page.IssuePage;
 import page.MainPage;
-import page.ProjectPage;
 
-public class ProjectTest implements DriverSetup{
+public class BrowseIssueTest implements DriverSetup{
     MainPage mainPage;
     HomePage homePage;
-    ProjectPage projectPage;
+    IssuePage issuePage;
 
     @BeforeAll
     void pageSetup(){
         mainPage = new MainPage(driver);
         homePage = new HomePage(driver);
-        projectPage = new ProjectPage(driver);
+        issuePage = new IssuePage(driver);
         mainPage.goToMainPage();
         mainPage.login(System.getenv("USER"), System.getenv("PASSWORD"));
         homePage.waitForLoad();
@@ -31,15 +31,13 @@ public class ProjectTest implements DriverSetup{
     }
 
     @Test
-    void browseMainProject(){
-        projectPage.goToPage();
-        Assertions.assertTrue(projectPage.mainPageAppears());
+    void browseIssue(){
+        Assertions.assertTrue(issuePage.checkBrowseIssue("https://jira.codecool.codecanvas.hu/projects/MTP/issues"));
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/availableProjects.csv", numLinesToSkip = 1)
-    void availableProjects(String url, String title){
-        Assertions.assertTrue(projectPage.checkAvailableProject(url, title));
+    @CsvFileSource(resources = "/checkIssues.csv", numLinesToSkip = 1)
+    void checkAvailableIssues(String url, String title){
+        Assertions.assertTrue(issuePage.checkAvailableIssue(url, title));
     }
-
 }
