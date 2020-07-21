@@ -16,8 +16,15 @@ public abstract class WebPage {
         wait = new WebDriverWait(driver, 10);
     }
 
+    public void acceptAlertBox(){
+        try{
+            driver.switchTo().alert().accept();
+        } catch (Exception ignore){}
+    }
+
     public void goToPageAndWait(String url, WebElement webElement){
         driver.get(url);
+        acceptAlertBox();
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 }
