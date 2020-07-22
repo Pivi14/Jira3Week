@@ -22,6 +22,7 @@ public class CreateIssueTest implements DriverSetup {
 
     @Test
     void createIssueHappyWay(){
+        homePage.waitForLoad();
         mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP",modalPage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
@@ -30,6 +31,7 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.catchPopupBox();
         modalPage.waitForElement(modalPage.getIssueTitle());
         Assertions.assertEquals(modalPage.getTextOfElement(modalPage.getIssueTitle()),"TestersOfPuppets CreateTest Issue");
+        modalPage.deleteIssue();
     }
 
 }

@@ -18,7 +18,14 @@ public abstract class WebPage {
 
     public void goToPageAndWait(String url, WebElement webElement){
         driver.get(url);
+        acceptAlertBox();
         wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    public void acceptAlertBox(){
+        try{
+            driver.switchTo().alert().accept();
+        } catch (Exception ignore){}
     }
 
     public void waitForElement(WebElement element){
