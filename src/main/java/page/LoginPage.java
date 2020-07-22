@@ -19,10 +19,10 @@ public class LoginPage extends WebPage{
 
     public void goToPage(){
         driver.get("https://jira.codecool.codecanvas.hu/login.jsp");
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
     }
 
     public void login(String userName, String password){
-        wait.until(ExpectedConditions.visibilityOf(loginButton));
         userNameField.sendKeys(userName);
         passwordField.sendKeys(password);
         loginButton.submit();

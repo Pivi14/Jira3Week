@@ -12,6 +12,8 @@ public class HomePage extends WebPage{
     WebElement profileMenu;
     @FindBy(id="log_out")
     WebElement logoutButton;
+    @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
+    WebElement homeTitle;
 
     @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
     WebElement homeTitle;
@@ -30,6 +32,10 @@ public class HomePage extends WebPage{
 
     public void clickOnCreateIssueButton(){
         createButton.click();
+    }
+
+    public void goToPage(){
+        goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa", homeTitle);
     }
 
     public void logout(){

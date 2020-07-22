@@ -1,0 +1,7 @@
+Name,Leader,Description,Assignee Type
+TestUnassigned,,description,Unassigned
+TestUser1Lead,User 1,,Component lead (User 1)
+TestComponentWithoutLeader,,,Component lead (Unassigned)
+TestLeadUnassigned,,,Project default (Unassigned)
+TestLeadAdmin,,,Project lead (Administrator)
+,,description,Unassigned
