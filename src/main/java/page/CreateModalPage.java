@@ -12,7 +12,8 @@ public class CreateModalPage extends WebPage {
     public CreateModalPage(WebDriver driver) {
         super(driver);
     }
-    @FindBy(id="summary")
+
+    @FindBy(id = "summary")
     WebElement summaryField;
 
     public WebElement getCreateIssueSubmitButton() {
@@ -23,43 +24,63 @@ public class CreateModalPage extends WebPage {
         return openIssueTitle;
     }
 
-    @FindBy (id="issues-subnavigation-title")
+    @FindBy(id = "issues-subnavigation-title")
     WebElement openIssueTitle;
-    @FindBy(id="create-issue-submit")
+    @FindBy(id = "summary-subnav-title")
+    WebElement summaryTitle;
+    @FindBy(id = "create-issue-submit")
     WebElement createIssueSubmitButton;
-    @FindBy(id="issuetype-field")
+
+    @FindBy(id = "issuetype-field")
     WebElement issueTypeField;
-    @FindBy(id="project-field")
+    @FindBy(id = "project-field")
     WebElement projectField;
     @FindBy(xpath = "//a[@class='cancel']")
     WebElement cancelIssueButton;
     @FindBy(id = "summary-val")
     WebElement issueTitle;
+    @FindBy(xpath = "//div[@class='error']")
+    WebElement errorMassage;
+    @FindBy(xpath ="//div[@class='navigator-content empty-results']" )
+    WebElement emptyIssues;
+
+    public WebElement getEmptyIssues() {
+        return emptyIssues;
+    }
+
+    public WebElement getSummaryTitle() {
+        return summaryTitle;
+    }
+
+    public WebElement getErrorMassage() {
+        return errorMassage;
+    }
 
     public WebElement getIssueTitle() {
         return issueTitle;
     }
 
-    public void chooseProject(String projectName){
+    public void chooseProject(String projectName) {
         projectField.sendKeys(projectName);
         projectField.sendKeys(Keys.ENTER);
     }
 
-    public void addSummary(String summary){
+    public void addSummary(String summary) {
         summaryField.sendKeys(summary);
     }
 
-    public void chooseIssueType(String issueType){
+    public void chooseIssueType(String issueType) {
         issueTypeField.sendKeys(issueType);
         issueTypeField.sendKeys(Keys.ENTER);
     }
 
-    public void submitIssue(){
+    public void submitIssue() {
         createIssueSubmitButton.click();
     }
 
-    public void cancelCreateIssue(){
+    public void cancelCreateIssue() {
         cancelIssueButton.click();
+        driver.switchTo().alert().accept();
     }
 
     public void catchPopupBox() {

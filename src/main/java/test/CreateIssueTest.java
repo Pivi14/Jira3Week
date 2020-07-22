@@ -1,5 +1,6 @@
 package test;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -18,11 +19,11 @@ public class CreateIssueTest implements DriverSetup {
         homePage = new HomePage(driver);
         modalPage = new CreateModalPage(driver);
         mainPage.login(System.getenv("USER"),System.getenv("PASSWORD"));
+        homePage.waitForLoad();
     }
 
     @Test
     void createIssueHappyWay(){
-        homePage.waitForLoad();
         mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP",modalPage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
@@ -34,4 +35,20 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.deleteIssue();
     }
 
+    @Test
+    void createIssueFail(){
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/summary",modalPage.getSummaryTitle());
+        homePage.clickOnCreateIssueButton();
+        modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
+        modalPage.submitIssue();
+        modalPage.waitForElement(modalPage.getErrorMassage());
+        modalPage.cancelCreateIssue();
+        modalPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues/?filter=allissues",modalPage.getOpenIssueTitle());
+        Assertions.assertNotNull(modalPage.getEmptyIssues());
+    }
+
+    @AfterEach
+    void goToMainPage(){
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa",homePage.getHomeTitle());
+    }
 }

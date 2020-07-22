@@ -13,12 +13,19 @@ public class HomePage extends WebPage{
     @FindBy(id="log_out")
     WebElement logoutButton;
 
+    @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
+    WebElement homeTitle;
+
+    public WebElement getHomeTitle() {
+        return homeTitle;
+    }
+
     public HomePage(WebDriver driver){
         super(driver);
     }
 
     public void waitForLoad(){
-        wait.until(ExpectedConditions.visibilityOf(createButton));
+        wait.until(ExpectedConditions.visibilityOf(homeTitle));
     }
 
     public void clickOnCreateIssueButton(){
