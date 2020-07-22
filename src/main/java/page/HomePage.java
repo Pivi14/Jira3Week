@@ -21,6 +21,10 @@ public class HomePage extends WebPage{
         wait.until(ExpectedConditions.visibilityOf(createButton));
     }
 
+    public void clickOnCreateIssueButton(){
+        createButton.click();
+    }
+
     public void logout(){
         profileMenu.click();
         wait.until(ExpectedConditions.visibilityOf(logoutButton));
