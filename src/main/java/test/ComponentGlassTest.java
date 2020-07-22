@@ -76,7 +76,6 @@ public class ComponentGlassTest implements DriverSetup{
         if(description != null){
             Assertions.assertEquals(description, glassPage.getComponentDescription(componentPage.getComponentId()));
         }
-        System.out.println(assigneeType);
         switch (assigneeType){
             case "Unassigned":
                 Assertions.assertTrue(glassPage.checkUnassignedType(componentPage.getComponentId()));
@@ -97,6 +96,8 @@ public class ComponentGlassTest implements DriverSetup{
         componentPage.goToPage();
         componentPage.clickMenuButton(name);
         componentPage.clickDelete();
+        glassPage.goToPage();
+        Assertions.assertEquals(glassPage.checkComponentsWithId(componentPage.getComponentId()), 0);
     }
 
 }

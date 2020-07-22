@@ -51,4 +51,8 @@ public class GlassPage extends WebPage{
         boolean adminLead = driver.findElement(By.xpath("//tr[@data-component-id='" + componentId + "']/td[@class='components-table__assignee']/div/a")).getAttribute("rel").equals("Administrator");
         return noLead && adminLead;
     }
+
+    public Integer checkComponentsWithId(String componentId){
+        return driver.findElements(By.xpath("//tr[@data-component-id='" + componentId + "']/td[@class='components-table__name']/div/a")).size();
+    }
 }
