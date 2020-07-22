@@ -27,6 +27,8 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.waitForCreateModal();
         modalPage.addSummary("TestersOfPuppets CreateTest Issue");
         modalPage.submitIssue();
+        modalPage.catchPopupBox();
+
     }
 
 }

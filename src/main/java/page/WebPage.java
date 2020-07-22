@@ -21,4 +21,7 @@ public abstract class WebPage {
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
+    public void waitForElement(WebElement element){
+        ;
+    }
 }
