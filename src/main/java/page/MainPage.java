@@ -41,4 +41,5 @@ public class MainPage extends WebPage{
         wait.until(ExpectedConditions.visibilityOf(logoutMessage));
         return logoutMessage != null;
     }
+
 }

@@ -33,9 +33,11 @@ public class CreateModalPage extends WebPage {
     WebElement projectField;
     @FindBy(xpath = "//a[@class='cancel']")
     WebElement cancelIssueButton;
+    @FindBy(id = "summary-val")
+    WebElement issueTitle;
 
-    public void waitForCreateModal(){
-        wait.until(ExpectedConditions.visibilityOf(createIssueSubmitButton));
+    public WebElement getIssueTitle() {
+        return issueTitle;
     }
 
     public void chooseProject(String projectName){

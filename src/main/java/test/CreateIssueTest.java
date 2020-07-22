@@ -17,18 +17,19 @@ public class CreateIssueTest implements DriverSetup {
         mainPage = new MainPage(driver);
         homePage = new HomePage(driver);
         modalPage = new CreateModalPage(driver);
-        mainPage.login(System.getenv("USERNAME"),System.getenv("PASSWORD"));
+        mainPage.login(System.getenv("USER"),System.getenv("PASSWORD"));
     }
 
     @Test
     void createIssueHappyWay(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP/issues/MTP-288?filter=allopenissues",modalPage.getOpenIssueTitle());
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP",modalPage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
-        modalPage.waitForCreateModal();
+        modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
         modalPage.addSummary("TestersOfPuppets CreateTest Issue");
         modalPage.submitIssue();
         modalPage.catchPopupBox();
-
+        modalPage.waitForElement(modalPage.getIssueTitle());
+        Assertions.assertEquals(modalPage.getTextOfElement(modalPage.getIssueTitle()),"TestersOfPuppets CreateTest Issue");
     }
 
 }
