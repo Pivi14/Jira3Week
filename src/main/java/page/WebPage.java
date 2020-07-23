@@ -33,6 +33,10 @@ public abstract class WebPage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForElementDisappear(WebElement element){
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
     public String getTextOfElement(WebElement element){
         return element.getText();
     }

@@ -15,6 +15,8 @@ public class IssuePage extends WebPage {
     WebElement issueTitle;
     @FindBy(id = "summary-form")
     WebElement summaryEditForm;
+    @FindBy(id = "edit-issue-submit")
+    WebElement updateIssueButton;
     @FindBy(id = "summary")
     WebElement summary;
     @FindBy(xpath = "//div[@class='navigator-content empty-results']")
@@ -23,6 +25,20 @@ public class IssuePage extends WebPage {
     WebElement acceptEditSummaryLine;
     @FindBy(id = "summary-subnav-title")
     WebElement summaryIssueTitle;
+    @FindBy(xpath = "//a[@href='#'][@class='cancel']")
+    WebElement editIssueModalCancelButton;
+    @FindBy(id = "edit-issue-dialog")
+    WebElement editIssueDialog;
+
+    public WebElement getUpdateIssueButton() {
+        return updateIssueButton;
+    }
+    public WebElement getEditIssueDialog() {
+        return editIssueDialog;
+    }
+    public WebElement getSummary() {
+        return summary;
+    }
 
     public WebElement getSummaryIssueTitle() {
         return summaryIssueTitle;
@@ -31,6 +47,7 @@ public class IssuePage extends WebPage {
     public WebElement getOpenIssueTitle() {
         return openIssueTitle;
     }
+
     public WebElement getEmptyIssues() {
         return emptyIssues;
     }
@@ -56,13 +73,35 @@ public class IssuePage extends WebPage {
         driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
     }
 
-    public void editIssueTitle(String issueTitleChange){
+    public void editIssueTitle(String issueTitleChange) {
         issueTitle.click();
         waitForElement(summaryEditForm);
         summary.sendKeys(issueTitleChange);
         acceptEditSummaryLine.click();
-        wait.until(ExpectedConditions.attributeToBe(issueTitle,"class", "editable-field inactive"));
+        wait.until(ExpectedConditions.attributeToBe(issueTitle, "class", "editable-field inactive"));
+    }
 
+    public void clickOnUpdateButtonAndWaitForModalDisappear(String name){
+        updateIssueButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(., '" + name + "')]")));
+    }
+
+    public void editIssueTitleThroughEditPage(String issueTitleChange){
+        summary.sendKeys(issueTitleChange);
+    }
+
+    public void clickOnCancelOnEditModal(){
+        editIssueModalCancelButton.click();
+        driver.switchTo().alert().accept();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("edit-issue-dialog")));
+    }
+
+
+    public void openEditModal() {
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/MTP-1431");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue")));
+        driver.findElement(By.id("edit-issue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue-dialog")));
     }
 
     public boolean checkAvailableIssue(String url, String title) {
