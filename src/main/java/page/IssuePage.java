@@ -13,8 +13,14 @@ public class IssuePage extends WebPage {
     WebElement openIssueTitle;
     @FindBy(id = "summary-val")
     WebElement issueTitle;
+    @FindBy(id = "summary-form")
+    WebElement summaryEditForm;
+    @FindBy(id = "summary")
+    WebElement summary;
     @FindBy(xpath = "//div[@class='navigator-content empty-results']")
     WebElement emptyIssues;
+    @FindBy(xpath = "//*[@id=\"summary-form\"]/div[2]/button[1]")
+    WebElement acceptEditSummaryLine;
     @FindBy(id = "summary-subnav-title")
     WebElement summaryIssueTitle;
 
@@ -40,6 +46,15 @@ public class IssuePage extends WebPage {
     public boolean checkBrowseIssue(String url) {
         goToPageAndWait(url, issueContent);
         return issueContent != null;
+    }
+
+    public void editIssueTitle(String issueTitleChange){
+        issueTitle.click();
+        waitForElement(summaryEditForm);
+        summary.sendKeys(issueTitleChange);
+        acceptEditSummaryLine.click();
+        wait.until(ExpectedConditions.attributeToBe(issueTitle,"class", "editable-field inactive"));
+
     }
 
     public boolean checkAvailableIssue(String url, String title) {
