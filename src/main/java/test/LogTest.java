@@ -18,8 +18,6 @@ public class LogTest extends DriverSetup{
         profilPage = new ProfilPage(driver);
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-//        homePage.checkLoggedOut();
-//        mainPage.goToMainPage();
     }
 
     @BeforeEach

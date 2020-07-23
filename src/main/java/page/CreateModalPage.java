@@ -21,8 +21,6 @@ public class CreateModalPage extends WebPage {
     WebElement summaryField;
     @FindBy(id = "create-issue-submit")
     WebElement createIssueSubmitButton;
-    @FindBy(id = "issuetype-field")
-    WebElement issueTypeField;
     @FindBy(id = "project-field")
     WebElement projectField;
     @FindBy(xpath = "//a[@class='cancel']")
@@ -47,11 +45,6 @@ public class CreateModalPage extends WebPage {
         summaryField.sendKeys(summary);
     }
 
-    public void chooseIssueType(String issueType) {
-        issueTypeField.sendKeys(issueType);
-        issueTypeField.sendKeys(Keys.ENTER);
-    }
-
     public void submitIssue() {
         wait.until(ExpectedConditions.elementToBeClickable(createIssueSubmitButton));
         createIssueSubmitButton.click();
@@ -59,11 +52,6 @@ public class CreateModalPage extends WebPage {
 
     public void cancelCreateIssue() {
         cancelIssueButton.click();
-        driver.switchTo().alert().accept();
-    }
-
-    public void acceptAlert() {
-//        wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
     }
 

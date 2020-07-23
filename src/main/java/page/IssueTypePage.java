@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ public class IssueTypePage extends WebPage{
     }
 
     public void goToPage(){
-//        goToPageAndWait("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/issuetypes", issueTypePanel);
         driver.get("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/issuetypes");
         wait.until(ExpectedConditions.visibilityOf(issueTypePanel));
     }

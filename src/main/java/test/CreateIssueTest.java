@@ -81,7 +81,7 @@ public class CreateIssueTest extends DriverSetup {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/issueTypes.csv", numLinesToSkip = 1)
-    void availableIssueTypes(String projectUrl) throws InterruptedException {
+    void availableIssueTypes(String projectUrl){
         searchPage.goToPage(projectUrl);
         searchPage.checkAvailableIssueTypes();
         Assertions.assertEquals(1, searchPage.checkIssueType("Bug"));

@@ -1,6 +1,5 @@
 package page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,20 +12,10 @@ public class HomePage extends WebPage{
     WebElement profileMenu;
     @FindBy(id="log_out")
     WebElement logoutButton;
-    @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
-    WebElement homeTitle;
     @FindBy(xpath = "//h3[contains(., 'Assigned to Me')]")
     WebElement AssignedMessage;
     @FindBy(xpath = "//a[@class='issue-created-key issue-link']")
     WebElement newIssueLink;
-
-    public void checkLoggedOut(){
-        acceptAlertBox();
-        if (driver.findElements(By.id("create_link")).size() > 0){
-            logout();
-        }
-    }
-
 
     public HomePage(WebDriver driver){
         super(driver);

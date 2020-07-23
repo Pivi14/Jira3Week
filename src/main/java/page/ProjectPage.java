@@ -16,7 +16,6 @@ public class ProjectPage extends WebPage{
     }
 
     public void goToPage(){
-//        goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/BrowseProjects.jspa", allProjectTitle);
         driver.get("https://jira.codecool.codecanvas.hu/secure/BrowseProjects.jspa");
         wait.until(ExpectedConditions.visibilityOf(allProjectTitle));
     }

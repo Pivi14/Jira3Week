@@ -6,23 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.concurrent.TimeUnit;
-
 public class SearchPage extends WebPage {
-    @FindBy(xpath = "//li[contains(@id, 10004)]")
-    WebElement bug;
-    @FindBy(xpath = "//li[contains(@id, 10001)]")
-    WebElement story;
-    @FindBy(xpath = "//li[contains(@id, 10002)]")
-    WebElement task;
-    @FindBy(xpath = "//li[contains(@id, 10003)]")
-    WebElement subTask;
-    @FindBy(xpath = "//div[@id='navigator-sidebar']/span")
-    WebElement navigationSidebarButton;
-    @FindBy(id = "navigator-sidebar")
-    WebElement navigationSidebar;
-    @FindBy(xpath = "//a[@title='Create a new search filter']")
-    WebElement newSearchFilterButton;
     @FindBy(xpath = "//div[@data-id='project']")
     WebElement projectDowndrop;
     @FindBy(xpath = "//div[@data-id='issuetype']")
@@ -53,8 +37,7 @@ public class SearchPage extends WebPage {
         wait.until(ExpectedConditions.visibilityOf(projectDowndrop));
     }
 
-    public void checkAvailableIssueTypes() throws InterruptedException {
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public void checkAvailableIssueTypes(){
         wait.until(ExpectedConditions.elementToBeClickable(issueType));
         issueType.click();
         wait.until(ExpectedConditions.visibilityOf(typeMultiSelect));
