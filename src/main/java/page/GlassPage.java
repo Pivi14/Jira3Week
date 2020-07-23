@@ -30,7 +30,9 @@ public class GlassPage extends WebPage{
     }
 
     public void goToPage(){
-        goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass", glassPage);
+//        goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass", glassPage);
+        driver.get("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass");
+        wait.until(ExpectedConditions.visibilityOf(glassPage));
     }
 
     public String getComponentTitle(String componentId){

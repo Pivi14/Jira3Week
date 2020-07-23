@@ -32,7 +32,10 @@ public class ComponentPage extends WebPage{
     }
 
     public void goToPage(){
-        goToPageAndWait("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/administer-components", componentPage);
+//        goToPageAndWait("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/administer-components", componentPage);
+        driver.get("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/administer-components");
+        acceptAlertBox();
+        wait.until(ExpectedConditions.visibilityOf(componentPage));
     }
 
     public void clickMenuButton(String name){

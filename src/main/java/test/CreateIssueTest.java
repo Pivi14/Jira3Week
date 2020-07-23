@@ -1,9 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page.*;
@@ -91,8 +88,14 @@ public class CreateIssueTest implements DriverSetup {
 
 
 
-    @AfterEach
-    void goToMainPage(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa",homePage.getHomeTitle());
+    @BeforeEach
+    void goToHomePage(){
+        homePage.goToPage();
     }
+
+    @AfterEach
+    void goToHomePageAfter(){
+        homePage.goToPage();
+    }
+
 }

@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchPage extends WebPage {
-
-
     @FindBy(xpath = "//li[contains(@id, 10004)]")
     WebElement bug;
     @FindBy(xpath = "//li[contains(@id, 10001)]")
@@ -59,7 +57,9 @@ public class SearchPage extends WebPage {
 //    }
 
     public void goToPage(){
-        goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/WEAKS-72?jql=",projectDowndrop);
+//        goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/WEAKS-72?jql=",projectDowndrop);
+        driver.get("https://jira.codecool.codecanvas.hu/browse/WEAKS-72?jql=");
+        wait.until(ExpectedConditions.visibilityOf(projectDowndrop));
     }
 
     public void setDefaultFilter() throws InterruptedException {

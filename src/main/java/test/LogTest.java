@@ -1,9 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.*;
 import page.HomePage;
 import page.LoginPage;
 import page.MainPage;
@@ -21,10 +18,16 @@ public class LogTest implements DriverSetup{
         profilPage = new ProfilPage(driver);
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
+        homePage.checkLoggedOut();
     }
 
     @BeforeEach
-    void loadMainPage(){
+    void goToHomePage(){
+        mainPage.goToMainPage();
+    }
+
+    @AfterEach
+    void goToHomePageAfter(){
         mainPage.goToMainPage();
     }
 

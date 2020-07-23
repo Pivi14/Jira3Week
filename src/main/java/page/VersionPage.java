@@ -30,7 +30,9 @@ public class VersionPage extends WebPage{
     }
 
     public void goToPage(){
-        goToPageAndWait("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/administer-versions", versionPage);
+//        goToPageAndWait("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/administer-versions", versionPage);
+        driver.get("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/administer-versions");
+        wait.until(ExpectedConditions.visibilityOf(versionPage));
     }
 
     public void clickMenuButton(String name){

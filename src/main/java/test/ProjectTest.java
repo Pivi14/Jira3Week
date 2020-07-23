@@ -1,9 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page.HomePage;
@@ -30,6 +27,11 @@ public class ProjectTest implements DriverSetup{
         homePage.goToPage();
     }
 
+    @AfterEach
+    void goToHomePageAfter(){
+        homePage.goToPage();
+    }
+
     @Test
     void browseMainProject(){
         projectPage.goToPage();
@@ -41,5 +43,6 @@ public class ProjectTest implements DriverSetup{
     void availableProjects(String url, String title){
         Assertions.assertTrue(projectPage.checkAvailableProject(url, title));
     }
+
 
 }

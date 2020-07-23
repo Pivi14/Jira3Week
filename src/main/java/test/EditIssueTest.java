@@ -1,9 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page.CreateModalPage;
@@ -67,8 +64,13 @@ public class EditIssueTest implements DriverSetup {
         Assertions.assertTrue(issuePage.editButtonIsAvailable());
     }
 
+    @BeforeEach
+    void goToHomePage(){
+        homePage.goToPage();
+    }
+
     @AfterEach
-    void goToMainPage() {
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa", homePage.getHomeTitle());
+    void goToHomePageAfter(){
+        homePage.goToPage();
     }
 }

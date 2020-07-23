@@ -1,9 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page.ComponentPage;
@@ -29,7 +26,12 @@ public class ComponentGlassTest implements DriverSetup {
     }
 
     @BeforeEach
-    void goToHomePage() {
+    void goToHomePage(){
+        homePage.goToPage();
+    }
+
+    @AfterEach
+    void goToHomePageAfter(){
         homePage.goToPage();
     }
 
@@ -100,4 +102,11 @@ public class ComponentGlassTest implements DriverSetup {
         Assertions.assertEquals(glassPage.checkComponentsWithId(componentPage.getComponentId()), 0);
     }
 
+    @Test
+    void createComponentWithoutTitle(){
+        componentPage.goToPage();
+        componentPage.typeComponentDescription("description");
+        componentPage.typeComponentAssigneeType("Unassigned");
+        Assertions.assertTrue(componentPage.checkAddButtonIsDisable());
+    }
 }

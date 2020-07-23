@@ -89,7 +89,9 @@ public class IssuePage extends WebPage {
     }
 
     public boolean checkBrowseIssue(String url) {
-        goToPageAndWait(url, issueContent);
+//        goToPageAndWait(url, issueContent);
+        driver.get(url);
+        wait.until(ExpectedConditions.visibilityOf(issueContent));
         return issueContent != null;
     }
 

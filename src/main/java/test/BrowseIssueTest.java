@@ -1,9 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page.HomePage;
@@ -24,9 +21,13 @@ public class BrowseIssueTest implements DriverSetup{
         mainPage.login(System.getenv("USER"), System.getenv("PASSWORD"));
         homePage.waitForLoad();
     }
-
     @BeforeEach
     void goToHomePage(){
+        homePage.goToPage();
+    }
+
+    @AfterEach
+    void goToHomePageAfter(){
         homePage.goToPage();
     }
 
@@ -40,4 +41,9 @@ public class BrowseIssueTest implements DriverSetup{
     void checkAvailableIssues(String url, String title){
         Assertions.assertTrue(issuePage.checkAvailableIssue(url, title));
     }
+
+//    @AfterAll
+//    void logout(){
+//        homePage.logout();
+//    }
 }

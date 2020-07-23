@@ -1,9 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import page.*;
 
 public class GlassTest implements DriverSetup{
@@ -25,11 +22,6 @@ public class GlassTest implements DriverSetup{
         homePage.waitForLoad();
     }
 
-    @BeforeEach
-    void goToHomePage(){
-        homePage.goToPage();
-    }
-
     @Test
     void testVerifyPermissionMatrix(){
         permissionPage.goToPage();
@@ -48,5 +40,15 @@ public class GlassTest implements DriverSetup{
         glassPage.goToPage();
         glassPage.saveActuallyIssueTypes();
         Assertions.assertEquals(issueTypePage.getExceptIssueTypes(), glassPage.getActualIssueTypes());
+    }
+
+    @BeforeEach
+    void goToHomePage(){
+        homePage.goToPage();
+    }
+
+    @AfterEach
+    void goToHomePageAfter(){
+        homePage.goToPage();
     }
 }

@@ -1,9 +1,12 @@
 package page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainPage extends WebPage{
     @FindBy(id="login-form-username")
@@ -16,20 +19,28 @@ public class MainPage extends WebPage{
     WebElement userNameErrorMessage;
     @FindBy(xpath = "//h1[contains(., 'Logout')]")
     WebElement logoutMessage;
+    @FindBy(id = "login-container")
+    WebElement loginContainer;
 
     public MainPage(WebDriver driver){
         super(driver);
     }
 
     public void login(String userName, String password){
-        wait.until(ExpectedConditions.visibilityOf(loginButton));
-        userNameField.sendKeys(userName);
-        passwordField.sendKeys(password);
-        loginButton.submit();
+        if (driver.findElements(By.id("login-container")).size() > 0){
+            wait.until(ExpectedConditions.visibilityOf(loginContainer));
+            userNameField.sendKeys(userName);
+            passwordField.sendKeys(password);
+            loginButton.submit();
+        }
     }
 
     public void goToMainPage(){
-        goToPageAndWait(System.getenv("MAIN_PAGE"),loginButton);
+        if (driver.findElements(By.id("login-container")).size() > 0){
+//            goToPageAndWait(System.getenv("MAIN_PAGE"), loginContainer);
+            driver.get(System.getenv("MAIN_PAGE"));
+            wait.until(ExpectedConditions.visibilityOf(loginContainer));
+        }
     }
 
     public boolean errorMessageAppears(){

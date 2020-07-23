@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 
@@ -17,7 +18,9 @@ public class PermissionPage extends WebPage{
     }
 
     public void goToPage(){
-        goToPageAndWait("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/permissions", permissionPanel);
+//        goToPageAndWait("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/permissions", permissionPanel);
+        driver.get("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/permissions");
+        wait.until(ExpectedConditions.visibilityOf(permissionPanel));
     }
 
     public void savePermissionData(){

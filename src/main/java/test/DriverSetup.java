@@ -7,18 +7,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public interface DriverSetup {
-//    String driverPath = System.getenv("WEB_DRIVER");
     ChromeDriver driver = new ChromeDriver();
 
     @BeforeAll
     default void setUp() {
-//        System.setProperty("webdriver.chrome.driver", driverPath);
         driver.manage().window().maximize();
         driver.get("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
     }
 
-    @AfterAll
-    default void close(){
-        driver.close();
-    }
+//    @AfterAll
+//    default void close(){
+//        driver.close();
+//    }
 }
