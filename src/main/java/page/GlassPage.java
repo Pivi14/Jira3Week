@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class GlassPage extends WebPage{
@@ -17,6 +16,10 @@ public class GlassPage extends WebPage{
     WebElement glassPage;
     @FindBy(xpath = "//a[@data-target='permissions']")
     WebElement permissionsButton;
+    @FindBy(id = "aui-uid-2")
+    WebElement versionsButton;
+    @FindBy(id = "versions-table")
+    WebElement versionTable;
 
     public GlassPage(WebDriver driver) {
         super(driver);
@@ -27,7 +30,7 @@ public class GlassPage extends WebPage{
     }
 
     public void goToPage(){
-        goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/PP1", glassPage);
+        goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass", glassPage);
     }
 
     public String getComponentTitle(String componentId){
@@ -83,6 +86,31 @@ public class GlassPage extends WebPage{
             actualIssueTypes.add(issueType.getAttribute("title"));
         }
         Collections.sort(actualIssueTypes);
+    }
+
+    public void clickVersionsButton(){
+        versionsButton.click();
+        wait.until(ExpectedConditions.visibilityOf(versionTable));
+    }
+
+    public String getVersionTitle(String versionId){
+        return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']")).getText();
+    }
+
+    public String getVersionStartDate(String versionId){
+        return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']/ancestor::tr/td[@class='versions-table__date_start']/div")).getText();
+    }
+
+    public String getVersionReleaseDate(String versionId){
+        return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']/ancestor::tr/td[@class='versions-table__date_release']/div")).getText();
+    }
+
+    public String getVersionDescription(String versionId){
+        return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']/ancestor::tr/td[@class='versions-table__description']/div")).getText();
+    }
+
+    public Integer getSearchedVersionsNumber(String versionId){
+        return versionTable.findElements(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']")).size();
     }
 
 }

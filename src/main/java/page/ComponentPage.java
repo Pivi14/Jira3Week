@@ -22,8 +22,6 @@ public class ComponentPage extends WebPage{
     WebElement componentAssigneeType;
     @FindBy(xpath = "//div[@class='components-add__confirm']/button")
     WebElement componentAddButton;
-    @FindBy(xpath = "//select[@name='assigneeType']")
-    Select assigneeTypeSelect;
 
     public String getComponentId() {
         return componentId;
