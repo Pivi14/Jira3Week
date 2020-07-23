@@ -29,13 +29,41 @@ public class IssuePage extends WebPage {
     WebElement editIssueModalCancelButton;
     @FindBy(id = "edit-issue-dialog")
     WebElement editIssueDialog;
+    @FindBy(id = "edit-issue")
+    WebElement editIssueButton;
+    @FindBy(xpath = "//a[@class='issue-link']")
+    WebElement issuelink;
+
+    public WebElement getIssuelink() {
+        return issuelink;
+    }
+
+    public boolean editButtonIsAvailable(){
+        return driver.findElements(By.id("edit-issue")).size() != 0;
+    }
+
+    public void gotToIssueWithID(String url, String issueId){
+        driver.get(url);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@data-issue-key='" + issueId + "']")));
+    }
+
+    public WebElement getElementFromIssueID(String issueID) {
+        return driver.findElement(By.xpath("//a[@data-issue-key='" + issueID + "']"));
+
+    }
+
+    public WebElement getEditIssueButton() {
+        return editIssueButton;
+    }
 
     public WebElement getUpdateIssueButton() {
         return updateIssueButton;
     }
+
     public WebElement getEditIssueDialog() {
         return editIssueDialog;
     }
+
     public WebElement getSummary() {
         return summary;
     }
@@ -81,19 +109,23 @@ public class IssuePage extends WebPage {
         wait.until(ExpectedConditions.attributeToBe(issueTitle, "class", "editable-field inactive"));
     }
 
-    public void clickOnUpdateButtonAndWaitForModalDisappear(String name){
+    public void clickOnUpdateButtonAndWaitForModalDisappear(String name) {
         updateIssueButton.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(., '" + name + "')]")));
     }
 
-    public void editIssueTitleThroughEditPage(String issueTitleChange){
+    public void editIssueTitleThroughEditPage(String issueTitleChange) {
         summary.sendKeys(issueTitleChange);
     }
 
-    public void clickOnCancelOnEditModal(){
+    public void clickOnCancelOnEditModal() {
         editIssueModalCancelButton.click();
         driver.switchTo().alert().accept();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("edit-issue-dialog")));
+    }
+
+    public WebElement giveElementByissuekey(String issueKey) {
+        return driver.findElement(By.xpath("//a[@data-issue-key='" + issueKey + "']"));
     }
 
 

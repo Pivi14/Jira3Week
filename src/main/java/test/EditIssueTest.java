@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import page.CreateModalPage;
 import page.HomePage;
 import page.IssuePage;
@@ -21,26 +23,26 @@ public class EditIssueTest implements DriverSetup {
         mainPage = new MainPage(driver);
         homePage = new HomePage(driver);
         modalPage = new CreateModalPage(driver);
-        mainPage.login(System.getenv("USER"),System.getenv("PASSWORD"));
+        mainPage.login(System.getenv("USER"), System.getenv("PASSWORD"));
         homePage.waitForLoad();
     }
 
     @Test
-    void editIssueInline(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431",issuePage.getIssueTitle());
+    void editIssueInline() {
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431", issuePage.getIssueTitle());
         issuePage.editIssueTitle("Test Top");
-        Assertions.assertEquals("Test Top",mainPage.getTextOfElement(issuePage.getIssueTitle()));
+        Assertions.assertEquals("Test Top", mainPage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.editIssueTitle("Can we edit issue? ToP");
     }
 
     @Test
-    public void testEditThroughEditPage(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431",issuePage.getIssueTitle());
+    public void testEditThroughEditPage() {
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431", issuePage.getIssueTitle());
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getSummary());
         issuePage.editIssueTitleThroughEditPage("Test Top");
         issuePage.clickOnUpdateButtonAndWaitForModalDisappear("Test Top");
-        Assertions.assertEquals("Test Top",mainPage.getTextOfElement(issuePage.getIssueTitle()));
+        Assertions.assertEquals("Test Top", mainPage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getSummary());
         issuePage.editIssueTitleThroughEditPage("Can we edit issue? ToP");
@@ -48,18 +50,25 @@ public class EditIssueTest implements DriverSetup {
     }
 
     @Test
-    public void testEditIssueCancellation(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431",issuePage.getIssueTitle());
+    public void testEditIssueCancellation() {
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431", issuePage.getIssueTitle());
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getIssueTitle());
         mainPage.waitForElement(issuePage.getSummary());
         issuePage.editIssueTitleThroughEditPage("Test Top");
         issuePage.clickOnCancelOnEditModal();
-        Assertions.assertEquals("Can we edit issue? ToP",mainPage.getTextOfElement(issuePage.getIssueTitle()));
+        Assertions.assertEquals("Can we edit issue? ToP", mainPage.getTextOfElement(issuePage.getIssueTitle()));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/editableIssueData.csv", numLinesToSkip = 1)
+    void isIssueEditable(String issuePagePath,String issueID) {
+        issuePage.gotToIssueWithID(issuePagePath, issueID);
+        Assertions.assertTrue(issuePage.editButtonIsAvailable());
     }
 
     @AfterEach
-    void goToMainPage(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa",homePage.getHomeTitle());
+    void goToMainPage() {
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa", homePage.getHomeTitle());
     }
 }
