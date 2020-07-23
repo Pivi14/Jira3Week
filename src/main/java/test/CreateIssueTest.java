@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import page.CreateModalPage;
-import page.HomePage;
-import page.IssuePage;
-import page.MainPage;
+import page.*;
 
 public class CreateIssueTest implements DriverSetup {
     IssuePage issuePage;
     MainPage mainPage;
     HomePage homePage;
     CreateModalPage modalPage;
+    SearchPage searchPage;
 
     @BeforeAll
     void pageSetup() {
@@ -23,6 +21,7 @@ public class CreateIssueTest implements DriverSetup {
         mainPage = new MainPage(driver);
         homePage = new HomePage(driver);
         modalPage = new CreateModalPage(driver);
+        searchPage = new SearchPage(driver);
         mainPage.login(System.getenv("USER"),System.getenv("PASSWORD"));
         homePage.waitForLoad();
     }
@@ -76,6 +75,18 @@ public class CreateIssueTest implements DriverSetup {
         Assertions.assertEquals(summary,issuePage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.deleteIssue();
         homePage.goToPage();
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/issueTypes.csv", numLinesToSkip = 1)
+    void availableIssueTypes(String projectID) throws InterruptedException {
+        searchPage.goToPage();
+        searchPage.setDefaultFilter();
+        searchPage.clickOnCheckBoxByProjectID(projectID);
+        Assertions.assertNotNull(searchPage.getBug()); // bug
+        Assertions.assertNotNull(searchPage.getStory()); // story
+        Assertions.assertNotNull(searchPage.getTask()); // task
+        Assertions.assertNotNull(searchPage.getSubTask()); // sub-task
     }
 
 

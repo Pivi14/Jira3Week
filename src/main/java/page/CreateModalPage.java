@@ -30,6 +30,7 @@ public class CreateModalPage extends WebPage {
     @FindBy(xpath = "//div[@class='error']")
     WebElement errorMassage;
 
+
     public WebElement getErrorMassage() {
         return errorMassage;
     }
@@ -59,7 +60,7 @@ public class CreateModalPage extends WebPage {
         driver.switchTo().alert().accept();
     }
 
-    public void acceptAlert(){
+    public void acceptAlert() {
 //        wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
     }

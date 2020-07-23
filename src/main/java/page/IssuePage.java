@@ -55,4 +55,6 @@ public class IssuePage extends WebPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@data-issue-key='" + title + "']")));
         return driver.findElement(By.xpath("//a[@data-issue-key='" + title + "']")) != null;
     }
+
+
 }
