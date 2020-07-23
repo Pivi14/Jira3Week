@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import page.CreateModalPage;
 import page.HomePage;
 import page.IssuePage;
@@ -35,7 +37,7 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.catchPopupBox();
         modalPage.waitForElement(issuePage.getIssueTitle());
         Assertions.assertEquals(modalPage.getTextOfElement(issuePage.getIssueTitle()),"TestersOfPuppets CreateTest Issue");
-        modalPage.deleteIssue();
+        issuePage.deleteIssue();
     }
 
     @Test
@@ -59,6 +61,21 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.cancelCreateIssue();
         mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues",issuePage.getOpenIssueTitle());
         Assertions.assertNotNull(issuePage.getEmptyIssues());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/createIssue.csv", numLinesToSkip = 1)
+    void createIssue(String project, String summary, String openIssuesPage){
+        modalPage.goToPageAndWait(openIssuesPage,issuePage.getOpenIssueTitle());
+        homePage.clickOnCreateIssueButton();
+        modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
+        modalPage.chooseProject(project);
+        modalPage.addSummary(summary);
+        modalPage.submitIssue();
+        modalPage.goToPageAndWait(openIssuesPage,issuePage.getOpenIssueTitle());
+        Assertions.assertEquals(summary,issuePage.getTextOfElement(issuePage.getIssueTitle()));
+        issuePage.deleteIssue();
+        homePage.goToPage();
     }
 
 
