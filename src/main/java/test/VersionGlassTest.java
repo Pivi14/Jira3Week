@@ -68,4 +68,26 @@ public class VersionGlassTest implements DriverSetup{
         glassPage.clickVersionsButton();
         Assertions.assertEquals(0, glassPage.getSearchedVersionsNumber(versionPage.getVersionId()));
     }
+
+    @Test
+    void testCreateAndDeleteVersionFullData(){
+        versionPage.goToPage();
+        versionPage.typeVersionName("ToP Test version full data");
+        versionPage.typeVersionStartDate("01/Jun/20");
+        versionPage.typeVersionReleaseDate("10/Jun/20");
+        versionPage.typeVersionDescription("Description");
+        versionPage.clickAddNewVersion("ToP Test version full data");
+        glassPage.goToPage();
+        glassPage.clickVersionsButton();
+        Assertions.assertEquals("ToP Test version full data", glassPage.getVersionTitle(versionPage.getVersionId()));
+        Assertions.assertEquals("01/Jun/20", glassPage.getVersionStartDate(versionPage.getVersionId()));
+        Assertions.assertEquals("10/Jun/20", glassPage.getVersionReleaseDate(versionPage.getVersionId()));
+        Assertions.assertEquals("Description", glassPage.getVersionDescription(versionPage.getVersionId()));
+        versionPage.goToPage();
+        versionPage.clickMenuButton("ToP Test version full data");
+        versionPage.clickDeleteButton();
+        glassPage.goToPage();
+        glassPage.clickVersionsButton();
+        Assertions.assertEquals(0, glassPage.getSearchedVersionsNumber(versionPage.getVersionId()));
+    }
 }

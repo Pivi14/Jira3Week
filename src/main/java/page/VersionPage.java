@@ -61,7 +61,7 @@ public class VersionPage extends WebPage{
         versionName.sendKeys(name);
     }
 
-    public void typeVersionStatDate(String startDate){
+    public void typeVersionStartDate(String startDate){
         versionStartDate.sendKeys(startDate);
     }
 

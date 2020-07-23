@@ -97,6 +97,18 @@ public class GlassPage extends WebPage{
         return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']")).getText();
     }
 
+    public String getVersionStartDate(String versionId){
+        return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']/ancestor::tr/td[@class='versions-table__date_start']/div")).getText();
+    }
+
+    public String getVersionReleaseDate(String versionId){
+        return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']/ancestor::tr/td[@class='versions-table__date_release']/div")).getText();
+    }
+
+    public String getVersionDescription(String versionId){
+        return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']/ancestor::tr/td[@class='versions-table__description']/div")).getText();
+    }
+
     public Integer getSearchedVersionsNumber(String versionId){
         return versionTable.findElements(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']")).size();
     }
