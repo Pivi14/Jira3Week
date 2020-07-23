@@ -6,9 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class GlassPage extends WebPage{
+    ArrayList<String> actualIssueTypes = new ArrayList<>();
     @FindBy(id = "glass-general-panel")
     WebElement glassPage;
     @FindBy(xpath = "//a[@data-target='permissions']")
@@ -16,6 +20,10 @@ public class GlassPage extends WebPage{
 
     public GlassPage(WebDriver driver) {
         super(driver);
+    }
+
+    public ArrayList<String> getActualIssueTypes() {
+        return actualIssueTypes;
     }
 
     public void goToPage(){
@@ -68,4 +76,13 @@ public class GlassPage extends WebPage{
     public boolean getPermissionsInGlass(String key){
         return driver.findElement(By.xpath("//b[text()='" + key + "']/ancestor::tr/td[3]/div")).getAttribute("class").equals("glass-true-icon");
     }
+
+    public void saveActuallyIssueTypes(){
+        List<WebElement> allIssueTypeRow = driver.findElements(By.xpath("//td[text()='Issue Types']/ancestor::tr/td[@class='glass-meta-value']/span"));
+        for (WebElement issueType: allIssueTypeRow){
+            actualIssueTypes.add(issueType.getAttribute("title"));
+        }
+        Collections.sort(actualIssueTypes);
+    }
+
 }

@@ -1,5 +1,6 @@
 package page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,7 +25,7 @@ public class HomePage extends WebPage{
     }
 
     public void waitForLoad(){
-        wait.until(ExpectedConditions.visibilityOf(homeTitle));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dashboard-content")));
     }
 
     public void clickOnCreateIssueButton(){
