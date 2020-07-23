@@ -4,14 +4,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class GlassPage extends WebPage{
+    ArrayList<String> actualIssueTypes = new ArrayList<>();
     @FindBy(id = "glass-general-panel")
     WebElement glassPage;
-
+    @FindBy(xpath = "//a[@data-target='permissions']")
+    WebElement permissionsButton;
 
     public GlassPage(WebDriver driver) {
         super(driver);
+    }
+
+    public ArrayList<String> getActualIssueTypes() {
+        return actualIssueTypes;
     }
 
     public void goToPage(){
@@ -55,4 +67,22 @@ public class GlassPage extends WebPage{
     public Integer checkComponentsWithId(String componentId){
         return driver.findElements(By.xpath("//tr[@data-component-id='" + componentId + "']/td[@class='components-table__name']/div/a")).size();
     }
+
+    public void clickPermissionsButton(){
+        permissionsButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("glass-permissions-panel")));
+    }
+
+    public boolean getPermissionsInGlass(String key){
+        return driver.findElement(By.xpath("//b[text()='" + key + "']/ancestor::tr/td[3]/div")).getAttribute("class").equals("glass-true-icon");
+    }
+
+    public void saveActuallyIssueTypes(){
+        List<WebElement> allIssueTypeRow = driver.findElements(By.xpath("//td[text()='Issue Types']/ancestor::tr/td[@class='glass-meta-value']/span"));
+        for (WebElement issueType: allIssueTypeRow){
+            actualIssueTypes.add(issueType.getAttribute("title"));
+        }
+        Collections.sort(actualIssueTypes);
+    }
+
 }
