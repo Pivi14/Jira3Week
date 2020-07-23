@@ -15,9 +15,6 @@ public class HomePage extends WebPage{
     @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
     WebElement homeTitle;
 
-    @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
-    WebElement homeTitle;
-
     public WebElement getHomeTitle() {
         return homeTitle;
     }

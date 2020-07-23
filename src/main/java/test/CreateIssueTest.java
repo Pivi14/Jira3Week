@@ -6,15 +6,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import page.CreateModalPage;
 import page.HomePage;
+import page.IssuePage;
 import page.MainPage;
 
 public class CreateIssueTest implements DriverSetup {
+    IssuePage issuePage;
     MainPage mainPage;
     HomePage homePage;
     CreateModalPage modalPage;
 
     @BeforeAll
     void pageSetup() {
+        issuePage = new IssuePage(driver);
         mainPage = new MainPage(driver);
         homePage = new HomePage(driver);
         modalPage = new CreateModalPage(driver);
@@ -24,26 +27,26 @@ public class CreateIssueTest implements DriverSetup {
 
     @Test
     void createIssueHappyWay(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP",modalPage.getOpenIssueTitle());
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP/issues",issuePage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
         modalPage.addSummary("TestersOfPuppets CreateTest Issue");
         modalPage.submitIssue();
         modalPage.catchPopupBox();
-        modalPage.waitForElement(modalPage.getIssueTitle());
-        Assertions.assertEquals(modalPage.getTextOfElement(modalPage.getIssueTitle()),"TestersOfPuppets CreateTest Issue");
+        modalPage.waitForElement(issuePage.getIssueTitle());
+        Assertions.assertEquals(modalPage.getTextOfElement(issuePage.getIssueTitle()),"TestersOfPuppets CreateTest Issue");
         modalPage.deleteIssue();
     }
 
     @Test
     void createIssueFail(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/summary",modalPage.getSummaryTitle());
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/summary",issuePage.getSummaryIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
         modalPage.submitIssue();
         modalPage.waitForElement(modalPage.getErrorMassage());
         modalPage.cancelCreateIssue();
-        modalPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues/?filter=allissues",modalPage.getOpenIssueTitle());
+        modalPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues/?filter=allissues",issuePage.getOpenIssueTitle());
         Assertions.assertNotNull(modalPage.getEmptyIssues());
     }
 

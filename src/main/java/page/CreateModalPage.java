@@ -13,32 +13,20 @@ public class CreateModalPage extends WebPage {
         super(driver);
     }
 
-    @FindBy(id = "summary")
-    WebElement summaryField;
-
     public WebElement getCreateIssueSubmitButton() {
         return createIssueSubmitButton;
     }
 
-    public WebElement getOpenIssueTitle() {
-        return openIssueTitle;
-    }
-
-    @FindBy(id = "issues-subnavigation-title")
-    WebElement openIssueTitle;
-    @FindBy(id = "summary-subnav-title")
-    WebElement summaryTitle;
+    @FindBy(id = "summary")
+    WebElement summaryField;
     @FindBy(id = "create-issue-submit")
     WebElement createIssueSubmitButton;
-
     @FindBy(id = "issuetype-field")
     WebElement issueTypeField;
     @FindBy(id = "project-field")
     WebElement projectField;
     @FindBy(xpath = "//a[@class='cancel']")
     WebElement cancelIssueButton;
-    @FindBy(id = "summary-val")
-    WebElement issueTitle;
     @FindBy(xpath = "//div[@class='error']")
     WebElement errorMassage;
     @FindBy(xpath ="//div[@class='navigator-content empty-results']" )
@@ -48,17 +36,10 @@ public class CreateModalPage extends WebPage {
         return emptyIssues;
     }
 
-    public WebElement getSummaryTitle() {
-        return summaryTitle;
-    }
-
     public WebElement getErrorMassage() {
         return errorMassage;
     }
 
-    public WebElement getIssueTitle() {
-        return issueTitle;
-    }
 
     public void chooseProject(String projectName) {
         projectField.sendKeys(projectName);
