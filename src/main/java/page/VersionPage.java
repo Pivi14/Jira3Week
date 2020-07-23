@@ -44,6 +44,13 @@ public class VersionPage extends WebPage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("version-edit")));
     }
 
+    public void clickDeleteButton(){
+        driver.findElement(By.xpath("//div[@id='version-actions-" + versionId + "']/ul/li/a[@class='project-config-operations-delete']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("version-" + versionId + "-delete-dialog")));
+        driver.findElement(By.id("submit")).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("version-" + versionId + "-delete-dialog")));
+    }
+
     public void editVersionTitle(String newName){
         driver.findElement(By.id("version-name")).sendKeys(newName);
         driver.findElement(By.id("version-save-submit")).submit();
@@ -66,9 +73,11 @@ public class VersionPage extends WebPage{
         versionDescription.sendKeys(description);
     }
 
-    public void clickAddNewVersion(){
+    public void clickAddNewVersion(String name){
         wait.until(ExpectedConditions.elementToBeClickable(versionAddButton));
         versionAddButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(., '" + name + "')]/ancestor::tr")));
+        versionId = driver.findElement(By.xpath("//a[contains(., '" + name + "')]/ancestor::tr")).getAttribute("data-version-id");
     }
 
     public boolean getAddButtonIsDisable(){

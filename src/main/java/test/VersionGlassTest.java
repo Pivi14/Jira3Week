@@ -52,4 +52,20 @@ public class VersionGlassTest implements DriverSetup{
         versionPage.typeVersionDescription("Description");
         Assertions.assertTrue(versionPage.getAddButtonIsDisable());
     }
+
+    @Test
+    void testCreateVersionWithMinimalData(){
+        versionPage.goToPage();
+        versionPage.typeVersionName("ToP Test create version");
+        versionPage.clickAddNewVersion("ToP Test create version");
+        glassPage.goToPage();
+        glassPage.clickVersionsButton();
+        Assertions.assertEquals("ToP Test create version", glassPage.getVersionTitle(versionPage.getVersionId()));
+        versionPage.goToPage();
+        versionPage.clickMenuButton("ToP Test create version");
+        versionPage.clickDeleteButton();
+        glassPage.goToPage();
+        glassPage.clickVersionsButton();
+        Assertions.assertEquals(0, glassPage.getSearchedVersionsNumber(versionPage.getVersionId()));
+    }
 }

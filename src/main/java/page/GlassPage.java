@@ -97,4 +97,8 @@ public class GlassPage extends WebPage{
         return versionTable.findElement(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']")).getText();
     }
 
+    public Integer getSearchedVersionsNumber(String versionId){
+        return versionTable.findElements(By.xpath("//a[@href='/browse/PP1/fixforversion/" + versionId + "']")).size();
+    }
+
 }
