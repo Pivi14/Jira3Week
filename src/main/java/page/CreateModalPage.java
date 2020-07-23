@@ -30,6 +30,7 @@ public class CreateModalPage extends WebPage {
     @FindBy(xpath = "//div[@class='error']")
     WebElement errorMassage;
 
+
     public WebElement getErrorMassage() {
         return errorMassage;
     }
@@ -41,6 +42,7 @@ public class CreateModalPage extends WebPage {
     }
 
     public void addSummary(String summary) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("summary")));
         summaryField.sendKeys(summary);
     }
 
@@ -58,7 +60,7 @@ public class CreateModalPage extends WebPage {
         driver.switchTo().alert().accept();
     }
 
-    public void acceptAlert(){
+    public void acceptAlert() {
 //        wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
     }
@@ -66,15 +68,6 @@ public class CreateModalPage extends WebPage {
     public void catchPopupBox() {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"aui-flag-container\"]/div/div/a")));
         driver.findElement(By.xpath("//*[@id=\"aui-flag-container\"]/div/div/a")).click();
-    }
-
-
-    public void deleteIssue() {
-        driver.findElement(By.id("opsbar-operations_more")).click();
-        driver.findElement(By.xpath("//*[@id=\"delete-issue\"]/a")).click();
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("delete-issue-submit")));
-        driver.findElement(By.id("delete-issue-submit")).click();
-        driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
     }
 
 }
