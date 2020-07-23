@@ -42,9 +42,19 @@ public class IssuePage extends WebPage {
         return issueContent != null;
     }
 
+    public void deleteIssue() {
+        driver.findElement(By.id("opsbar-operations_more")).click();
+        driver.findElement(By.xpath("//*[@id=\"delete-issue\"]/a")).click();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("delete-issue-submit")));
+        driver.findElement(By.id("delete-issue-submit")).click();
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
+    }
+
     public boolean checkAvailableIssue(String url, String title) {
         driver.get(url);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@data-issue-key='" + title + "']")));
         return driver.findElement(By.xpath("//a[@data-issue-key='" + title + "']")) != null;
     }
+
+
 }
