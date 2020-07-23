@@ -10,6 +10,16 @@ public class VersionPage extends WebPage{
     String versionId;
     @FindBy(id = "release-page")
     WebElement versionPage;
+    @FindBy(xpath = "//input[@name='name']")
+    WebElement versionName;
+    @FindBy(xpath = "//input[@name='startDate']")
+    WebElement versionStartDate;
+    @FindBy(xpath = "//input[@name='releaseDate']")
+    WebElement versionReleaseDate;
+    @FindBy(xpath = "//input[@name='description']")
+    WebElement versionDescription;
+    @FindBy(xpath = "//button[contains(., 'Add')]")
+    WebElement versionAddButton;
 
     public VersionPage(WebDriver driver) {
         super(driver);
@@ -38,5 +48,30 @@ public class VersionPage extends WebPage{
         driver.findElement(By.id("version-name")).sendKeys(newName);
         driver.findElement(By.id("version-save-submit")).submit();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("version-edit")));
+    }
+
+    public void typeVersionName(String name){
+        versionName.sendKeys(name);
+    }
+
+    public void typeVersionStatDate(String startDate){
+        versionStartDate.sendKeys(startDate);
+    }
+
+    public void typeVersionReleaseDate(String releaseDate){
+        versionReleaseDate.sendKeys(releaseDate);
+    }
+
+    public void typeVersionDescription(String description){
+        versionDescription.sendKeys(description);
+    }
+
+    public void clickAddNewVersion(){
+        wait.until(ExpectedConditions.elementToBeClickable(versionAddButton));
+        versionAddButton.click();
+    }
+
+    public boolean getAddButtonIsDisable(){
+        return versionAddButton.getAttribute("disabled").equals("true");
     }
 }

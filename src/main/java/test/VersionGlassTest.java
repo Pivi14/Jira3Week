@@ -45,4 +45,11 @@ public class VersionGlassTest implements DriverSetup{
         glassPage.clickVersionsButton();
         Assertions.assertEquals("ToP test version", glassPage.getVersionTitle(versionPage.getVersionId()));
     }
+
+    @Test
+    void testCreateVersionWithoutName(){
+        versionPage.goToPage();
+        versionPage.typeVersionDescription("Description");
+        Assertions.assertTrue(versionPage.getAddButtonIsDisable());
+    }
 }
