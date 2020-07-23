@@ -25,11 +25,13 @@ public class IssuePage extends WebPage {
     public WebElement getOpenIssueTitle() {
         return openIssueTitle;
     }
+    public WebElement getEmptyIssues() {
+        return emptyIssues;
+    }
 
     public WebElement getIssueTitle() {
         return issueTitle;
     }
-
 
     public IssuePage(WebDriver driver) {
         super(driver);

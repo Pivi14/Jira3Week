@@ -29,12 +29,6 @@ public class CreateModalPage extends WebPage {
     WebElement cancelIssueButton;
     @FindBy(xpath = "//div[@class='error']")
     WebElement errorMassage;
-    @FindBy(xpath ="//div[@class='navigator-content empty-results']" )
-    WebElement emptyIssues;
-
-    public WebElement getEmptyIssues() {
-        return emptyIssues;
-    }
 
     public WebElement getErrorMassage() {
         return errorMassage;
@@ -61,6 +55,11 @@ public class CreateModalPage extends WebPage {
 
     public void cancelCreateIssue() {
         cancelIssueButton.click();
+        driver.switchTo().alert().accept();
+    }
+
+    public void acceptAlert(){
+//        wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
     }
 

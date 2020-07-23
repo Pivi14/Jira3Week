@@ -47,8 +47,21 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.waitForElement(modalPage.getErrorMassage());
         modalPage.cancelCreateIssue();
         modalPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues/?filter=allissues",issuePage.getOpenIssueTitle());
-        Assertions.assertNotNull(modalPage.getEmptyIssues());
+        Assertions.assertNotNull(issuePage.getEmptyIssues());
     }
+
+    @Test
+    void createIssueCancel(){
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/summary",issuePage.getSummaryIssueTitle());
+        homePage.clickOnCreateIssueButton();
+        modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
+        modalPage.addSummary("TestersOfPuppets CreateTest Issue");
+        modalPage.cancelCreateIssue();
+        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues",issuePage.getOpenIssueTitle());
+        Assertions.assertNotNull(issuePage.getEmptyIssues());
+    }
+
+
 
     @AfterEach
     void goToMainPage(){
