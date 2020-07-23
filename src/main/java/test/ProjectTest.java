@@ -27,11 +27,6 @@ public class ProjectTest implements DriverSetup{
         homePage.goToPage();
     }
 
-    @AfterEach
-    void goToHomePageAfter(){
-        homePage.goToPage();
-    }
-
     @Test
     void browseMainProject(){
         projectPage.goToPage();

@@ -24,6 +24,11 @@ public class EditIssueTest implements DriverSetup {
         homePage.waitForLoad();
     }
 
+    @BeforeEach
+    void goToHomePage(){
+        homePage.goToPage();
+    }
+
     @Test
     void editIssueInline() {
         mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431", issuePage.getIssueTitle());
@@ -62,15 +67,5 @@ public class EditIssueTest implements DriverSetup {
     void isIssueEditable(String issuePagePath,String issueID) {
         issuePage.gotToIssueWithID(issuePagePath, issueID);
         Assertions.assertTrue(issuePage.editButtonIsAvailable());
-    }
-
-    @BeforeEach
-    void goToHomePage(){
-        homePage.goToPage();
-    }
-
-    @AfterEach
-    void goToHomePageAfter(){
-        homePage.goToPage();
     }
 }

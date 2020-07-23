@@ -25,11 +25,6 @@ public class VersionGlassTest implements DriverSetup{
         homePage.goToPage();
     }
 
-    @AfterEach
-    void goToHomePageAfter(){
-        homePage.goToPage();
-    }
-
     @Test
     void editVersionTest(){
         versionPage.goToPage();

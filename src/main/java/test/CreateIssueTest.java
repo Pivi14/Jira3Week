@@ -23,6 +23,11 @@ public class CreateIssueTest implements DriverSetup {
         homePage.waitForLoad();
     }
 
+    @BeforeEach
+    void goToHomePage(){
+        homePage.goToPage();
+    }
+
     @Test
     void createIssueHappyWay(){
         mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP/issues",issuePage.getOpenIssueTitle());
@@ -65,10 +70,11 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.goToPageAndWait(openIssuesPage,issuePage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
-        modalPage.chooseProject(project);
         modalPage.addSummary(summary);
+        modalPage.chooseProject(project);
         modalPage.submitIssue();
-        modalPage.goToPageAndWait(openIssuesPage,issuePage.getOpenIssueTitle());
+        homePage.openNewIssue();
+//        modalPage.goToPageAndWait(openIssuesPage,issuePage.getOpenIssueTitle());
         Assertions.assertEquals(summary,issuePage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.deleteIssue();
         homePage.goToPage();
@@ -85,17 +91,4 @@ public class CreateIssueTest implements DriverSetup {
         Assertions.assertNotNull(searchPage.getTask()); // task
         Assertions.assertNotNull(searchPage.getSubTask()); // sub-task
     }
-
-
-
-    @BeforeEach
-    void goToHomePage(){
-        homePage.goToPage();
-    }
-
-    @AfterEach
-    void goToHomePageAfter(){
-        homePage.goToPage();
-    }
-
 }

@@ -17,6 +17,8 @@ public class HomePage extends WebPage{
     WebElement homeTitle;
     @FindBy(id = "dashboard-content")
     WebElement dashboard;
+    @FindBy(xpath = "//a[@class='issue-created-key issue-link']")
+    WebElement newIssueLink;
 
     public void checkLoggedOut(){
         if (driver.findElements(By.id("create_link")).size() > 0){
@@ -41,10 +43,14 @@ public class HomePage extends WebPage{
     }
 
     public void goToPage(){
-//        goToPageAndWait("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa", homeTitle);
         driver.get("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
         acceptAlertBox();
         wait.until(ExpectedConditions.visibilityOf(dashboard));
+    }
+
+    public void openNewIssue(){
+        wait.until(ExpectedConditions.visibilityOf(newIssueLink));
+        newIssueLink.click();
     }
 
     public void logout(){

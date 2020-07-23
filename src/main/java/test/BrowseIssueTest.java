@@ -26,11 +26,6 @@ public class BrowseIssueTest implements DriverSetup{
         homePage.goToPage();
     }
 
-    @AfterEach
-    void goToHomePageAfter(){
-        homePage.goToPage();
-    }
-
     @Test
     void browseIssue(){
         Assertions.assertTrue(issuePage.checkBrowseIssue("https://jira.codecool.codecanvas.hu/projects/MTP/issues"));

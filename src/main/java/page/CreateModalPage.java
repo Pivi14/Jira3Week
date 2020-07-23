@@ -38,6 +38,7 @@ public class CreateModalPage extends WebPage {
 
     public void chooseProject(String projectName) {
         projectField.sendKeys(projectName);
+        wait.until(ExpectedConditions.attributeContains(projectField, "aria-activedescendant", projectName.toLowerCase()));
         projectField.sendKeys(Keys.ENTER);
     }
 
@@ -52,6 +53,7 @@ public class CreateModalPage extends WebPage {
     }
 
     public void submitIssue() {
+        wait.until(ExpectedConditions.elementToBeClickable(createIssueSubmitButton));
         createIssueSubmitButton.click();
     }
 

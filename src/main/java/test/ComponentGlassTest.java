@@ -30,11 +30,6 @@ public class ComponentGlassTest implements DriverSetup {
         homePage.goToPage();
     }
 
-    @AfterEach
-    void goToHomePageAfter(){
-        homePage.goToPage();
-    }
-
     @Test
     void editComponentTest() {
         componentPage.goToPage();

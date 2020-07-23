@@ -37,7 +37,6 @@ public class MainPage extends WebPage{
 
     public void goToMainPage(){
         if (driver.findElements(By.id("login-container")).size() > 0){
-//            goToPageAndWait(System.getenv("MAIN_PAGE"), loginContainer);
             driver.get(System.getenv("MAIN_PAGE"));
             wait.until(ExpectedConditions.visibilityOf(loginContainer));
         }

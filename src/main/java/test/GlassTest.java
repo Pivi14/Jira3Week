@@ -22,6 +22,11 @@ public class GlassTest implements DriverSetup{
         homePage.waitForLoad();
     }
 
+    @BeforeEach
+    void goToHomePage(){
+        homePage.goToPage();
+    }
+
     @Test
     void testVerifyPermissionMatrix(){
         permissionPage.goToPage();
@@ -40,15 +45,5 @@ public class GlassTest implements DriverSetup{
         glassPage.goToPage();
         glassPage.saveActuallyIssueTypes();
         Assertions.assertEquals(issueTypePage.getExceptIssueTypes(), glassPage.getActualIssueTypes());
-    }
-
-    @BeforeEach
-    void goToHomePage(){
-        homePage.goToPage();
-    }
-
-    @AfterEach
-    void goToHomePageAfter(){
-        homePage.goToPage();
     }
 }

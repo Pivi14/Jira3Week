@@ -26,11 +26,6 @@ public class LogTest implements DriverSetup{
         mainPage.goToMainPage();
     }
 
-    @AfterEach
-    void goToHomePageAfter(){
-        mainPage.goToMainPage();
-    }
-
     @Test
     void loginHappyWay(){
         mainPage.login(System.getenv("USER"), System.getenv("PASSWORD"));
