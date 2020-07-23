@@ -15,12 +15,20 @@ public class HomePage extends WebPage{
     @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
     WebElement homeTitle;
 
+    public WebElement getHomeTitle() {
+        return homeTitle;
+    }
+
     public HomePage(WebDriver driver){
         super(driver);
     }
 
     public void waitForLoad(){
-        wait.until(ExpectedConditions.visibilityOf(createButton));
+        wait.until(ExpectedConditions.visibilityOf(homeTitle));
+    }
+
+    public void clickOnCreateIssueButton(){
+        createButton.click();
     }
 
     public void goToPage(){

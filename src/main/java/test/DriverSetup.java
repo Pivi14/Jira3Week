@@ -14,7 +14,7 @@ public interface DriverSetup {
     default void setUp() {
 //        System.setProperty("webdriver.chrome.driver", driverPath);
         driver.manage().window().maximize();
-        driver.get(System.getenv("MAIN_PAGE"));
+        driver.get("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
     }
 
     @AfterAll

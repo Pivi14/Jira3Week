@@ -27,4 +27,13 @@ public abstract class WebPage {
         acceptAlertBox();
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
+
+
+    public void waitForElement(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public String getTextOfElement(WebElement element){
+        return element.getText();
+    }
 }

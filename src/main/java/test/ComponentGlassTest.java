@@ -11,14 +11,14 @@ import page.GlassPage;
 import page.HomePage;
 import page.MainPage;
 
-public class ComponentGlassTest implements DriverSetup{
+public class ComponentGlassTest implements DriverSetup {
     MainPage mainPage;
     HomePage homePage;
     ComponentPage componentPage;
     GlassPage glassPage;
 
     @BeforeAll
-    void pageSetup(){
+    void pageSetup() {
         mainPage = new MainPage(driver);
         homePage = new HomePage(driver);
         componentPage = new ComponentPage(driver);
@@ -29,12 +29,12 @@ public class ComponentGlassTest implements DriverSetup{
     }
 
     @BeforeEach
-    void goToHomePage(){
+    void goToHomePage() {
         homePage.goToPage();
     }
 
     @Test
-    void editComponentTest(){
+    void editComponentTest() {
         componentPage.goToPage();
         componentPage.clickMenuButton("ToP test component");
         componentPage.clickEdit();
@@ -51,18 +51,18 @@ public class ComponentGlassTest implements DriverSetup{
 
     @ParameterizedTest
     @CsvFileSource(resources = "/Components.csv", numLinesToSkip = 1)
-    void createComponent(String name, String leader, String description, String assigneeType){
+    void createComponent(String name, String leader, String description, String assigneeType) {
         componentPage.goToPage();
-        if (name != null){
+        if (name != null) {
             componentPage.typeComponentName(name);
         } else {
             Assertions.assertTrue(componentPage.checkAddButtonIsDisable());
             return;
         }
-        if (leader != null){
+        if (leader != null) {
             componentPage.typeComponentLeader(leader);
         }
-        if (description != null){
+        if (description != null) {
             componentPage.typeComponentDescription(description);
         }
         componentPage.typeComponentAssigneeType(assigneeType);
@@ -70,13 +70,13 @@ public class ComponentGlassTest implements DriverSetup{
 
         glassPage.goToPage();
         Assertions.assertEquals(name, glassPage.getComponentTitle(componentPage.getComponentId()));
-        if(leader != null){
+        if (leader != null) {
             Assertions.assertEquals(leader, glassPage.getComponentLeader(componentPage.getComponentId()));
         }
-        if(description != null){
+        if (description != null) {
             Assertions.assertEquals(description, glassPage.getComponentDescription(componentPage.getComponentId()));
         }
-        switch (assigneeType){
+        switch (assigneeType) {
             case "Unassigned":
                 Assertions.assertTrue(glassPage.checkUnassignedType(componentPage.getComponentId()));
                 break;

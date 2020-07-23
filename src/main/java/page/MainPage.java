@@ -29,7 +29,7 @@ public class MainPage extends WebPage{
     }
 
     public void goToMainPage(){
-        goToPageAndWait(System.getenv("MAIN_PAGE"), loginButton);
+        goToPageAndWait(System.getenv("MAIN_PAGE"),loginButton);
     }
 
     public boolean errorMessageAppears(){
@@ -41,4 +41,5 @@ public class MainPage extends WebPage{
         wait.until(ExpectedConditions.visibilityOf(logoutMessage));
         return logoutMessage != null;
     }
+
 }
