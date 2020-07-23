@@ -27,19 +27,19 @@ public class MainPage extends WebPage{
     }
 
     public void login(String userName, String password){
-        if (driver.findElements(By.id("login-container")).size() > 0){
-            wait.until(ExpectedConditions.visibilityOf(loginContainer));
-            userNameField.sendKeys(userName);
-            passwordField.sendKeys(password);
-            loginButton.submit();
-        }
+        acceptAlertBox();
+        wait.until(ExpectedConditions.visibilityOf(loginContainer));
+        userNameField.sendKeys(userName);
+        passwordField.sendKeys(password);
+        loginButton.submit();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public void goToMainPage(){
-        if (driver.findElements(By.id("login-container")).size() > 0){
-            driver.get(System.getenv("MAIN_PAGE"));
-            wait.until(ExpectedConditions.visibilityOf(loginContainer));
-        }
+        acceptAlertBox();
+        driver.get(System.getenv("MAIN_PAGE"));
+        acceptAlertBox();
+        wait.until(ExpectedConditions.visibilityOf(loginContainer));
     }
 
     public boolean errorMessageAppears(){

@@ -6,7 +6,7 @@ import page.LoginPage;
 import page.MainPage;
 import page.ProfilPage;
 
-public class LogTest implements DriverSetup{
+public class LogTest extends DriverSetup{
     MainPage mainPage;
     ProfilPage profilPage;
     HomePage homePage;
@@ -18,11 +18,12 @@ public class LogTest implements DriverSetup{
         profilPage = new ProfilPage(driver);
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-        homePage.checkLoggedOut();
+//        homePage.checkLoggedOut();
+//        mainPage.goToMainPage();
     }
 
     @BeforeEach
-    void goToHomePage(){
+    void goToMainPage(){
         mainPage.goToMainPage();
     }
 

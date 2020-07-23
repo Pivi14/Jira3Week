@@ -15,27 +15,25 @@ public class HomePage extends WebPage{
     WebElement logoutButton;
     @FindBy(xpath = "//h1[contains(., 'System Dashboard')]")
     WebElement homeTitle;
-    @FindBy(id = "dashboard-content")
-    WebElement dashboard;
+    @FindBy(xpath = "//h3[contains(., 'Assigned to Me')]")
+    WebElement AssignedMessage;
     @FindBy(xpath = "//a[@class='issue-created-key issue-link']")
     WebElement newIssueLink;
 
     public void checkLoggedOut(){
+        acceptAlertBox();
         if (driver.findElements(By.id("create_link")).size() > 0){
             logout();
         }
     }
 
-    public WebElement getHomeTitle() {
-        return homeTitle;
-    }
 
     public HomePage(WebDriver driver){
         super(driver);
     }
 
     public void waitForLoad(){
-        wait.until(ExpectedConditions.visibilityOf(dashboard));
+        wait.until(ExpectedConditions.visibilityOf(AssignedMessage));
     }
 
     public void clickOnCreateIssueButton(){
@@ -45,7 +43,7 @@ public class HomePage extends WebPage{
     public void goToPage(){
         driver.get("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
         acceptAlertBox();
-        wait.until(ExpectedConditions.visibilityOf(dashboard));
+        wait.until(ExpectedConditions.visibilityOf(AssignedMessage));
     }
 
     public void openNewIssue(){

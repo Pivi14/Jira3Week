@@ -35,6 +35,7 @@ public class VersionPage extends WebPage{
     }
 
     public void clickMenuButton(String name){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(., '" + name + "')]/ancestor::tr")));
         versionId = driver.findElement(By.xpath("//a[contains(., '" + name + "')]/ancestor::tr")).getAttribute("data-version-id");
         driver.findElement(By.xpath("//a[@href='#version-actions-" + versionId + "']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("version-actions-" + versionId)));
@@ -72,6 +73,7 @@ public class VersionPage extends WebPage{
     }
 
     public void typeVersionDescription(String description){
+        wait.until(ExpectedConditions.visibilityOf(versionDescription));
         versionDescription.sendKeys(description);
     }
 

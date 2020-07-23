@@ -8,7 +8,7 @@ import page.GlassPage;
 import page.HomePage;
 import page.MainPage;
 
-public class ComponentGlassTest implements DriverSetup {
+public class ComponentGlassTest extends DriverSetup {
     MainPage mainPage;
     HomePage homePage;
     ComponentPage componentPage;

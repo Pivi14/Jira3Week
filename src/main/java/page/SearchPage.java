@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.concurrent.TimeUnit;
+
 public class SearchPage extends WebPage {
     @FindBy(xpath = "//li[contains(@id, 10004)]")
     WebElement bug;
@@ -32,54 +34,27 @@ public class SearchPage extends WebPage {
         super(driver);
     }
 
-    public WebElement getBug() {
-        return bug;
+    public Integer checkIssueType(String issueTypeName){
+        switch (issueTypeName){
+            case "Bug":
+                return driver.findElements(By.xpath("//li[contains(@id, 10004)]")).size();
+            case "Story":
+                return driver.findElements(By.xpath("//li[contains(@id, 10001)]")).size();
+            case "Task":
+                return driver.findElements(By.xpath("//li[contains(@id, 10002)]")).size();
+            case "Sub-task":
+                return driver.findElements(By.xpath("//li[contains(@id, 10003)]")).size();
+        }
+        return 0;
     }
 
-    public WebElement getStory() {
-        return story;
-    }
-
-    public WebElement getTask() {
-        return task;
-    }
-
-    public WebElement getSubTask() {
-        return subTask;
-    }
-
-
-//    private void checkAvailableIssueTypes() throws InterruptedException {
-//        Thread.sleep(1000);
-//        wait.until(ExpectedConditions.elementToBeClickable(issueTypeField));
-//        issueTypeField.click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("searcher-type-multi-select")));
-//    }
-
-    public void goToPage(){
-//        goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/WEAKS-72?jql=",projectDowndrop);
-        driver.get("https://jira.codecool.codecanvas.hu/browse/WEAKS-72?jql=");
+    public void goToPage(String url){
+        driver.get(url);
         wait.until(ExpectedConditions.visibilityOf(projectDowndrop));
     }
 
-    public void setDefaultFilter() throws InterruptedException {
-        driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/WEAKS-72?jql=");
-        if (navigationSidebar.getAttribute("class").contains("collapsed")) {
-            navigationSidebarButton.click();
-        }
-        newSearchFilterButton.click();
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(projectDowndrop));
-        projectDowndrop.click();
-    }
-
-    public void clickOnCheckBoxByProjectID(String ID) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@type='checkbox'][@value='" + ID + "']")));
-        driver.findElement(By.xpath("//input[@type='checkbox'][@value='" + ID + "']")).click();
-    }
-
     public void checkAvailableIssueTypes() throws InterruptedException {
-        Thread.sleep(1000);
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.elementToBeClickable(issueType));
         issueType.click();
         wait.until(ExpectedConditions.visibilityOf(typeMultiSelect));

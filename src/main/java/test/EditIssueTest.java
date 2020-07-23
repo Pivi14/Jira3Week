@@ -8,7 +8,7 @@ import page.HomePage;
 import page.IssuePage;
 import page.MainPage;
 
-public class EditIssueTest implements DriverSetup {
+public class EditIssueTest extends DriverSetup {
     IssuePage issuePage;
     MainPage mainPage;
     HomePage homePage;

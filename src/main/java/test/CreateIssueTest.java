@@ -5,7 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import page.*;
 
-public class CreateIssueTest implements DriverSetup {
+public class CreateIssueTest extends DriverSetup {
     IssuePage issuePage;
     MainPage mainPage;
     HomePage homePage;
@@ -74,7 +74,6 @@ public class CreateIssueTest implements DriverSetup {
         modalPage.chooseProject(project);
         modalPage.submitIssue();
         homePage.openNewIssue();
-//        modalPage.goToPageAndWait(openIssuesPage,issuePage.getOpenIssueTitle());
         Assertions.assertEquals(summary,issuePage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.deleteIssue();
         homePage.goToPage();
@@ -82,13 +81,12 @@ public class CreateIssueTest implements DriverSetup {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/issueTypes.csv", numLinesToSkip = 1)
-    void availableIssueTypes(String projectID) throws InterruptedException {
-        searchPage.goToPage();
-        searchPage.setDefaultFilter();
-        searchPage.clickOnCheckBoxByProjectID(projectID);
-        Assertions.assertNotNull(searchPage.getBug()); // bug
-        Assertions.assertNotNull(searchPage.getStory()); // story
-        Assertions.assertNotNull(searchPage.getTask()); // task
-        Assertions.assertNotNull(searchPage.getSubTask()); // sub-task
+    void availableIssueTypes(String projectUrl) throws InterruptedException {
+        searchPage.goToPage(projectUrl);
+        searchPage.checkAvailableIssueTypes();
+        Assertions.assertEquals(1, searchPage.checkIssueType("Bug"));
+        Assertions.assertEquals(1, searchPage.checkIssueType("Story"));
+        Assertions.assertEquals(1, searchPage.checkIssueType("Task"));
+        Assertions.assertEquals(1, searchPage.checkIssueType("Sub-task"));
     }
 }

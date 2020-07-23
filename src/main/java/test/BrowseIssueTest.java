@@ -7,7 +7,7 @@ import page.HomePage;
 import page.IssuePage;
 import page.MainPage;
 
-public class BrowseIssueTest implements DriverSetup{
+public class BrowseIssueTest extends DriverSetup{
     MainPage mainPage;
     HomePage homePage;
     IssuePage issuePage;

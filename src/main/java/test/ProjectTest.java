@@ -7,7 +7,7 @@ import page.HomePage;
 import page.MainPage;
 import page.ProjectPage;
 
-public class ProjectTest implements DriverSetup{
+public class ProjectTest extends DriverSetup{
     MainPage mainPage;
     HomePage homePage;
     ProjectPage projectPage;

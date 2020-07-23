@@ -3,7 +3,7 @@ package test;
 import org.junit.jupiter.api.*;
 import page.*;
 
-public class VersionGlassTest implements DriverSetup{
+public class VersionGlassTest extends DriverSetup{
     HomePage homePage;
     MainPage mainPage;
     GlassPage glassPage;
