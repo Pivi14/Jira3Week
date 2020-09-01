@@ -19,7 +19,7 @@ public abstract class DriverSetup {
 
     @BeforeAll
     void setUp() throws MalformedURLException {
-        DesiredCapabilities capability = null;
+        DesiredCapabilities capability;
         if (System.getenv("BROWSER").equals("firefox")){
             capability = DesiredCapabilities.firefox();
             capability.setBrowserName("firefox");
