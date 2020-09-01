@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.sonatype.inject.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,8 +19,14 @@ public abstract class DriverSetup {
 
     @BeforeAll
     void setUp() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.chrome();
-        capability.setBrowserName("chrome");
+        DesiredCapabilities capability = null;
+        if (System.getenv("BROWSER").equals("firefox")){
+            capability = DesiredCapabilities.firefox();
+            capability.setBrowserName("firefox");
+        } else {
+            capability = DesiredCapabilities.chrome();
+            capability.setBrowserName("chrome");
+        }
         capability.setPlatform(Platform.LINUX);
         driver = new RemoteWebDriver(new URL(System.getenv("GRID_URL")),capability);
         driver.manage().window().maximize();
