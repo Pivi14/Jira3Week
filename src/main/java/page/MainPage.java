@@ -36,7 +36,7 @@ public class MainPage extends WebPage{
 
     public void goToMainPage(){
         acceptAlertBox();
-        driver.get(System.getenv("BASE_URL"));
+        driver.get(System.getenv("BASE_URL") + "/secure/Dashboard.jspa");
         acceptAlertBox();
         wait.until(ExpectedConditions.visibilityOf(loginContainer));
     }
