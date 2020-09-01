@@ -24,7 +24,7 @@ public class IssueTypePage extends WebPage{
     }
 
     public void goToPage(){
-        driver.get("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/issuetypes");
+        driver.get(System.getenv("BASE_URL") + "/plugins/servlet/project-config/PP1/issuetypes");
         wait.until(ExpectedConditions.visibilityOf(issueTypePanel));
     }
 

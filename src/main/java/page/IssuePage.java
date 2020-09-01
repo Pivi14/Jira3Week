@@ -74,7 +74,7 @@ public class IssuePage extends WebPage {
         driver.findElement(By.xpath("//*[@id=\"delete-issue\"]/a")).click();
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("delete-issue-submit")));
         driver.findElement(By.id("delete-issue-submit")).click();
-        driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
+        driver.navigate().to(System.getenv("BASE_URL") + "/secure/Dashboard.jspa");
     }
 
     public void editIssueTitle(String issueTitleChange) {
@@ -101,7 +101,7 @@ public class IssuePage extends WebPage {
     }
 
     public void openEditModal() {
-        driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/MTP-1431");
+        driver.navigate().to(System.getenv("BASE_URL") + "/browse/MTP-1431");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue")));
         driver.findElement(By.id("edit-issue")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue-dialog")));

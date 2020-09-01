@@ -31,7 +31,7 @@ public class ComponentPage extends WebPage{
     }
 
     public void goToPage(){
-        driver.get("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/administer-components");
+        driver.get(System.getenv("BASE_URL") + "/plugins/servlet/project-config/PP1/administer-components");
         acceptAlertBox();
         wait.until(ExpectedConditions.visibilityOf(componentPage));
     }

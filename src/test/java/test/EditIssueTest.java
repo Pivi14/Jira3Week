@@ -31,7 +31,7 @@ public class EditIssueTest extends DriverSetup {
 
     @Test
     void editIssueInline() {
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431", issuePage.getIssueTitle());
+        mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/browse/MTP-1431", issuePage.getIssueTitle());
         issuePage.editIssueTitle("Test Top");
         Assertions.assertEquals("Test Top", mainPage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.editIssueTitle("Can we edit issue? ToP");
@@ -39,7 +39,7 @@ public class EditIssueTest extends DriverSetup {
 
     @Test
     public void testEditThroughEditPage() {
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431", issuePage.getIssueTitle());
+        mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/browse/MTP-1431", issuePage.getIssueTitle());
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getSummary());
         issuePage.editIssueTitleThroughEditPage("Test Top");
@@ -53,7 +53,7 @@ public class EditIssueTest extends DriverSetup {
 
     @Test
     public void testEditIssueCancellation() {
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/browse/MTP-1431", issuePage.getIssueTitle());
+        mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/browse/MTP-1431", issuePage.getIssueTitle());
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getIssueTitle());
         mainPage.waitForElement(issuePage.getSummary());

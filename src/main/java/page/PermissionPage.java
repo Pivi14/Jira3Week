@@ -18,7 +18,7 @@ public class PermissionPage extends WebPage{
     }
 
     public void goToPage(){
-        driver.get("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/permissions");
+        driver.get(System.getenv("BASE_URL") + "/plugins/servlet/project-config/PP1/permissions");
         wait.until(ExpectedConditions.visibilityOf(permissionPanel));
     }
 

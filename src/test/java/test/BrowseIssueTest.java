@@ -28,7 +28,7 @@ public class BrowseIssueTest extends DriverSetup{
 
     @Test
     void browseIssue(){
-        Assertions.assertTrue(issuePage.checkBrowseIssue("https://jira.codecool.codecanvas.hu/projects/MTP/issues"));
+        Assertions.assertTrue(issuePage.checkBrowseIssue(System.getenv("BASE_URL") + "/projects/MTP/issues"));
     }
 
     @ParameterizedTest

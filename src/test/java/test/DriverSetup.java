@@ -21,9 +21,9 @@ public abstract class DriverSetup {
         DesiredCapabilities capability = DesiredCapabilities.chrome();
         capability.setBrowserName("chrome");
         capability.setPlatform(Platform.LINUX);
-        driver = new RemoteWebDriver(new URL("https://selenium:CoolCanvas19.@seleniumhub.codecool.codecanvas.hu/wd/hub"),capability);
+        driver = new RemoteWebDriver(new URL(System.getenv("GRID_URL")),capability);
         driver.manage().window().maximize();
-        driver.get("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
+        driver.get(System.getenv("BASE_URL") + "/secure/Dashboard.jspa");
     }
 
     @AfterAll

@@ -18,7 +18,7 @@ public class LoginPage extends WebPage{
     }
 
     public void goToPage(){
-        driver.get("https://jira.codecool.codecanvas.hu/login.jsp");
+        driver.get(System.getenv("BASE_URL") + "/login.jsp");
         wait.until(ExpectedConditions.visibilityOf(loginButton));
     }
 

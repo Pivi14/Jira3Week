@@ -13,7 +13,7 @@ public abstract class WebPage {
     public WebPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, Integer.parseInt(System.getenv("TIMEOUT")));
     }
 
     public void acceptAlertBox(){

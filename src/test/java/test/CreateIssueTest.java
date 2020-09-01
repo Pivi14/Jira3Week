@@ -30,7 +30,7 @@ public class CreateIssueTest extends DriverSetup {
 
     @Test
     void createIssueHappyWay(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/MTP/issues",issuePage.getOpenIssueTitle());
+        mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/projects/MTP/issues",issuePage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
         modalPage.addSummary("TestersOfPuppets CreateTest Issue");
@@ -43,24 +43,24 @@ public class CreateIssueTest extends DriverSetup {
 
     @Test
     void createIssueFail(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/summary",issuePage.getSummaryIssueTitle());
+        mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/projects/EMPTY/summary",issuePage.getSummaryIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
         modalPage.submitIssue();
         modalPage.waitForElement(modalPage.getErrorMassage());
         modalPage.cancelCreateIssue();
-        modalPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues/?filter=allissues",issuePage.getOpenIssueTitle());
+        modalPage.goToPageAndWait(System.getenv("BASE_URL") + "/projects/EMPTY/issues/?filter=allissues",issuePage.getOpenIssueTitle());
         Assertions.assertNotNull(issuePage.getEmptyIssues());
     }
 
     @Test
     void createIssueCancel(){
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/summary",issuePage.getSummaryIssueTitle());
+        mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/projects/EMPTY/summary",issuePage.getSummaryIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
         modalPage.addSummary("TestersOfPuppets CreateTest Issue");
         modalPage.cancelCreateIssue();
-        mainPage.goToPageAndWait("https://jira.codecool.codecanvas.hu/projects/EMPTY/issues",issuePage.getOpenIssueTitle());
+        mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/projects/EMPTY/issues",issuePage.getOpenIssueTitle());
         Assertions.assertNotNull(issuePage.getEmptyIssues());
     }
 

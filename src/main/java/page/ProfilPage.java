@@ -14,7 +14,7 @@ public class ProfilPage extends WebPage{
     }
 
     public void goProfilPage(){
-        driver.get("https://jira.codecool.codecanvas.hu/secure/ViewProfile.jspa");
+        driver.get(System.getenv("BASE_URL") + "/secure/ViewProfile.jspa");
         wait.until(ExpectedConditions.visibilityOf(userName));
     }
 

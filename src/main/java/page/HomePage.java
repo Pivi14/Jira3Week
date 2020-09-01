@@ -30,7 +30,7 @@ public class HomePage extends WebPage{
     }
 
     public void goToPage(){
-        driver.get("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
+        driver.get(System.getenv("BASE_URL") + "/secure/Dashboard.jspa");
         acceptAlertBox();
         wait.until(ExpectedConditions.visibilityOf(AssignedMessage));
     }
