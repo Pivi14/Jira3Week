@@ -22,7 +22,6 @@ public class PermissionPage extends WebPage{
         wait.until(ExpectedConditions.visibilityOf(permissionPanel));
     }
 
-
     public void savePermissionData(){
         permissionFromProjectPage.put("Browse Projects", driver.findElement(By.xpath("//tr[@data-permission-key='BROWSE_PROJECTS']/td[@class]/dl/dd")).getText().equals("Any logged in user"));
         permissionFromProjectPage.put("Create Issues", driver.findElement(By.xpath("//tr[@data-permission-key='CREATE_ISSUES']/td[@class]/dl/dd")).getText().equals("Any logged in user"));
