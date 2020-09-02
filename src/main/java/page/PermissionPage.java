@@ -31,5 +31,4 @@ public class PermissionPage extends WebPage{
     public HashMap<String, Boolean> getPermissionFromProjectPage() {
         return permissionFromProjectPage;
     }
-
 }
