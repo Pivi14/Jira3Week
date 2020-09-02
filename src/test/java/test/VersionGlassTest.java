@@ -30,12 +30,12 @@ public class VersionGlassTest extends DriverSetup{
         versionPage.goToPage();
         versionPage.clickMenuButton("ToP test version");
         versionPage.clickEditButton();
-        versionPage.editVersionTitle("ToP");
+        versionPage.editVersionTitle("ToP " + uniqueID);
         glassPage.goToPage();
         glassPage.clickVersionsButton();
-        Assertions.assertEquals("ToP", glassPage.getVersionTitle(versionPage.getVersionId()));
+        Assertions.assertEquals("ToP " + uniqueID, glassPage.getVersionTitle(versionPage.getVersionId()));
         versionPage.goToPage();
-        versionPage.clickMenuButton("ToP");
+        versionPage.clickMenuButton("ToP " + uniqueID);
         versionPage.clickEditButton();
         versionPage.editVersionTitle("ToP test version");
         glassPage.goToPage();
@@ -53,13 +53,13 @@ public class VersionGlassTest extends DriverSetup{
     @Test
     void testCreateVersionWithMinimalData(){
         versionPage.goToPage();
-        versionPage.typeVersionName("ToP Test create version");
-        versionPage.clickAddNewVersion("ToP Test create version");
+        versionPage.typeVersionName("ToP Test create version " + uniqueID);
+        versionPage.clickAddNewVersion("ToP Test create version " + uniqueID);
         glassPage.goToPage();
         glassPage.clickVersionsButton();
-        Assertions.assertEquals("ToP Test create version", glassPage.getVersionTitle(versionPage.getVersionId()));
+        Assertions.assertEquals("ToP Test create version " + uniqueID, glassPage.getVersionTitle(versionPage.getVersionId()));
         versionPage.goToPage();
-        versionPage.clickMenuButton("ToP Test create version");
+        versionPage.clickMenuButton("ToP Test create version " + uniqueID);
         versionPage.clickDeleteButton();
         glassPage.goToPage();
         glassPage.clickVersionsButton();
@@ -69,19 +69,19 @@ public class VersionGlassTest extends DriverSetup{
     @Test
     void testCreateAndDeleteVersionFullData(){
         versionPage.goToPage();
-        versionPage.typeVersionName("ToP Test version full data");
+        versionPage.typeVersionName("ToP Test version full data " + uniqueID);
         versionPage.typeVersionStartDate("01/Jun/20");
         versionPage.typeVersionReleaseDate("10/Jun/20");
         versionPage.typeVersionDescription("Description");
-        versionPage.clickAddNewVersion("ToP Test version full data");
+        versionPage.clickAddNewVersion("ToP Test version full data " + uniqueID);
         glassPage.goToPage();
         glassPage.clickVersionsButton();
-        Assertions.assertEquals("ToP Test version full data", glassPage.getVersionTitle(versionPage.getVersionId()));
+        Assertions.assertEquals("ToP Test version full data " + uniqueID, glassPage.getVersionTitle(versionPage.getVersionId()));
         Assertions.assertEquals("01/Jun/20", glassPage.getVersionStartDate(versionPage.getVersionId()));
         Assertions.assertEquals("10/Jun/20", glassPage.getVersionReleaseDate(versionPage.getVersionId()));
         Assertions.assertEquals("Description", glassPage.getVersionDescription(versionPage.getVersionId()));
         versionPage.goToPage();
-        versionPage.clickMenuButton("ToP Test version full data");
+        versionPage.clickMenuButton("ToP Test version full data " + uniqueID);
         versionPage.clickDeleteButton();
         glassPage.goToPage();
         glassPage.clickVersionsButton();

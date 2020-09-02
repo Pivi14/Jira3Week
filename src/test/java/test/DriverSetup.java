@@ -12,10 +12,12 @@ import org.sonatype.inject.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.UUID;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class DriverSetup {
     WebDriver driver;
+    String uniqueID = UUID.randomUUID().toString();
 
     @BeforeAll
     void setUp() throws MalformedURLException {

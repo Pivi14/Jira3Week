@@ -32,8 +32,8 @@ public class EditIssueTest extends DriverSetup {
     @Test
     void editIssueInline() {
         mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/browse/MTP-1431", issuePage.getIssueTitle());
-        issuePage.editIssueTitle("Test Top");
-        Assertions.assertEquals("Test Top", mainPage.getTextOfElement(issuePage.getIssueTitle()));
+        issuePage.editIssueTitle("Test Top " + uniqueID);
+        Assertions.assertEquals("Test Top " + uniqueID, mainPage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.editIssueTitle("Can we edit issue? ToP");
     }
 
@@ -42,9 +42,9 @@ public class EditIssueTest extends DriverSetup {
         mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/browse/MTP-1431", issuePage.getIssueTitle());
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getSummary());
-        issuePage.editIssueTitleThroughEditPage("Test Top");
-        issuePage.clickOnUpdateButtonAndWaitForModalDisappear("Test Top");
-        Assertions.assertEquals("Test Top", mainPage.getTextOfElement(issuePage.getIssueTitle()));
+        issuePage.editIssueTitleThroughEditPage("Test Top " + uniqueID);
+        issuePage.clickOnUpdateButtonAndWaitForModalDisappear("Test Top " + uniqueID);
+        Assertions.assertEquals("Test Top " + uniqueID, mainPage.getTextOfElement(issuePage.getIssueTitle()));
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getSummary());
         issuePage.editIssueTitleThroughEditPage("Can we edit issue? ToP");
@@ -57,7 +57,7 @@ public class EditIssueTest extends DriverSetup {
         issuePage.openEditModal();
         mainPage.waitForElement(issuePage.getIssueTitle());
         mainPage.waitForElement(issuePage.getSummary());
-        issuePage.editIssueTitleThroughEditPage("Test Top");
+        issuePage.editIssueTitleThroughEditPage("Test Top " + uniqueID);
         issuePage.clickOnCancelOnEditModal();
         Assertions.assertEquals("Can we edit issue? ToP", mainPage.getTextOfElement(issuePage.getIssueTitle()));
     }

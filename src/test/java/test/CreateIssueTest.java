@@ -33,11 +33,11 @@ public class CreateIssueTest extends DriverSetup {
         mainPage.goToPageAndWait(System.getenv("BASE_URL") + "/projects/MTP/issues",issuePage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());
-        modalPage.addSummary("TestersOfPuppets CreateTest Issue");
+        modalPage.addSummary("TestersOfPuppets CreateTest Issue " + uniqueID);
         modalPage.submitIssue();
         modalPage.catchPopupBox();
         modalPage.waitForElement(issuePage.getIssueTitle());
-        Assertions.assertEquals(modalPage.getTextOfElement(issuePage.getIssueTitle()),"TestersOfPuppets CreateTest Issue");
+        Assertions.assertEquals(modalPage.getTextOfElement(issuePage.getIssueTitle()),"TestersOfPuppets CreateTest Issue " + uniqueID);
         issuePage.deleteIssue();
     }
 
@@ -67,6 +67,7 @@ public class CreateIssueTest extends DriverSetup {
     @ParameterizedTest
     @CsvFileSource(resources = "/createIssue.csv", numLinesToSkip = 1)
     void createIssue(String project, String summary, String openIssuesPage){
+        summary = summary + uniqueID;
         modalPage.goToPageAndWait(openIssuesPage,issuePage.getOpenIssueTitle());
         homePage.clickOnCreateIssueButton();
         modalPage.waitForElement(modalPage.getCreateIssueSubmitButton());

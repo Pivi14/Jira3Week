@@ -35,11 +35,11 @@ public class ComponentGlassTest extends DriverSetup {
         componentPage.goToPage();
         componentPage.clickMenuButton("ToP test component");
         componentPage.clickEdit();
-        componentPage.editComponent("ToP");
+        componentPage.editComponent("ToP " + uniqueID);
         glassPage.goToPage();
-        Assertions.assertEquals("ToP", glassPage.getComponentTitle(componentPage.getComponentId()));
+        Assertions.assertEquals("ToP " + uniqueID, glassPage.getComponentTitle(componentPage.getComponentId()));
         componentPage.goToPage();
-        componentPage.clickMenuButton("ToP");
+        componentPage.clickMenuButton("ToP " + uniqueID);
         componentPage.clickEdit();
         componentPage.editComponent("ToP test component");
         glassPage.goToPage();
@@ -51,6 +51,7 @@ public class ComponentGlassTest extends DriverSetup {
     void createComponent(String name, String leader, String description, String assigneeType) {
         componentPage.goToPage();
         if (name != null) {
+            name = name + uniqueID;
             componentPage.typeComponentName(name);
         } else {
             Assertions.assertTrue(componentPage.checkAddButtonIsDisable());
