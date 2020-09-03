@@ -71,6 +71,7 @@ public class IssuePage extends WebPage {
 
     public void deleteIssue() {
         driver.findElement(By.id("opsbar-operations_more")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"delete-issue\"]/a")));
         driver.findElement(By.xpath("//*[@id=\"delete-issue\"]/a")).click();
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("delete-issue-submit")));
         driver.findElement(By.id("delete-issue-submit")).click();
