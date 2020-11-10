@@ -12,5 +12,8 @@ Maven
 Junit
 Selenium
 Page Object Model
-Key Driven Development
+Key Driven Testing
 Data Driven Testing
+
+The project uses the ChromeDriver from the systems path on the computer.
+Common values (username, password,base url, ect) are saved as enviroment variables in the IDE.
